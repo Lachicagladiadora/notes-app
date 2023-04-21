@@ -131,22 +131,21 @@ body{
 }
 
 button{
-  background-color: var(--black);
+  background-color: var(--grey);
   margin-top: 4px;
   width: 900px;
   /* height: 1.5rem; */
   border-radius: 6px;
+  border-color: var(--black);
+  border-style: double;
 }
 
 
 .search-button{
-  background-color: var(--black);
-
+  background-color: var(--grey);
+  border-color: var(--black);
 }
-/* .search-button:hover{
-  background-color: var(--white);
-  cursor: pointer;
-} */
+
 .search-button:hover,
 .search-button #img:hover{
   background-color: var(--white);
