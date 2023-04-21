@@ -174,10 +174,11 @@ button{
 .note-list{
   background-color: var(--black);
   padding: 1rem 1.5rem;
-  margin-top: 3rem;
+  margin: 3rem auto;
   width: 900px;
   border-radius: 6px;
-
+  text-align: center;
+  justify-content: center;
 }
 
 .note-list:hover{
