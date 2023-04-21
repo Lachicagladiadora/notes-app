@@ -109,11 +109,13 @@ body{
   font-family: var(--type-font);
   color: var(--white);
 }
-
+/* TITLE */
 .title-1{
   text-align: center;
 }
 
+
+/* SEARCHER */
 .search{
   text-align: center;
 }
@@ -129,10 +131,16 @@ body{
   margin-top: 3rem;
   padding: 1rem 1.5rem;
 }
+.search-input:hover{
+  background-color: var(--silver);
+  border-color: var(--black);
+  
+}
 
+/* BUTTON OF SEARCHER */
 button{
   background-color: var(--grey);
-  margin-top: 4px;
+  margin-top: 6px;
   width: 900px;
   /* height: 1.5rem; */
   border-radius: 6px;
@@ -140,21 +148,20 @@ button{
   border-style: double;
 }
 
-
 .search-button{
   background-color: var(--grey);
   border-color: var(--black);
+  margin-bottom: 3rem;
 }
 
 .search-button:hover,
 .search-button #img:hover{
-  background-color: var(--white);
+  background-color: var(--silver);
   color: var(--black);
   cursor: pointer;
   border-color: #424242;
 
 }
-
 
 #img{
   background-color: var(--grey);
@@ -164,22 +171,26 @@ button{
   border-radius: 6px;
 
 }
-/* #img:hover{
-  background-color: var(--white);
-  color: var(--black);
-  cursor: pointer;
-} */
 
-.note-list{
+
+/* CONTAIN NOTES LIST (ul) */
+.contain-notes{
+  list-style: none;
+}
+
+/* NOTES LIST */
+.note-item{
   background-color: var(--black);
   padding: 1rem 1.5rem;
-  margin: 3rem auto;
+  margin: 1rem auto;
   width: 900px;
   border-radius: 6px;
   text-align: center;
-  justify-content: center;
+  
 }
 
-.note-list:hover{
+.note-item:hover{
   background-color: var(--silver);
+  font-size: 110%;
+  color: var(--yellow);
 }

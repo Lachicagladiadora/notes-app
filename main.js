@@ -25,64 +25,8 @@ import './style.css'
 
 
 
-/*
-// const searchElement=document.getElementById("search")
-// const notesWrittenElement=document.getElementById('notesWritten')
-// const imgElement=document.getElementById('img')
+// SEARCHER
 
-// const favoritesElement=document.getElementById('favorites')
-// const newNoteElement=document.getElementById('newNote')
-
-// const noteList=[]
-
-// // guardar nota en local Storage
-
-// // poder buscar
-// function filterNote(noteList){
-//   noteList.filter
-// }
-
-// // const 
-// const searchInputElement = document.createElement('input')
-// const searchButtonElement = document.createElement('button')
-// const searchImgElement = document.createElement('img')
-// searchInputElement.classList.add('search-input')
-// searchButtonElement.classList.add('search-button')
-// // searchImgElement.classList.add('search-img')
-// // searchImgElement.setAttribute('src', search.image)
-// searchImgElement.addEventListener('click',filterNote )
-
-// searchElement.appendChild(searchInputElement)
-// searchElement.appendChild(searchButtonElement)
-// // searchButtonElement.appendChild(searchImgElement)
-
-
-// // poder agregar una nota
-
-
-// noteList.push(newNote)
-
-// function renderNote(array){
-//   for(element of array){
-//     const element=document.createElement('textarea')
-//     noteWrite.classList.add('note-write')
-    
-//     notesWrittenElement.appendChild(noteWrite)
-
-//   }
-// }
-// renderNote(noteList)
-// poder copiar una nota
-// poder editar una nota
-// poder borrar una nota
-// responsive desing
-// poder agregar a favoritos
-*/
-
-
-// searcher
-
-// const searchElement=document.getElementById('search')
 const containInputElement=document.getElementById('containSInput')
 const containButtonElement=document.getElementById('containSButton')
 
@@ -110,7 +54,7 @@ containButtonElement.innerHTML=roundedButton({id:'searchButton',onclick, childre
 const searchButtonElement=document.getElementById('searchButton')
 searchButtonElement.classList.add('search-button')
 
-//notes list
+//NOTES LIST
 const containNotesElement=document.getElementById('containNotes')
 
 const noteList=[];
@@ -118,16 +62,9 @@ noteList.push('recommendation read the odyssey')
 noteList.push('watch the series silicon valley')
 noteList.push('search tuberculosis articles')
 
-const renderNotes=({noteList,id})=>{
-  return`
-
-  <div id='${id}'>
-  ${noteList}
-  </div>
-  `
-}
-containNotesElement.innerHTML=renderNotes({id:'note',noteList})
-containNotesElement.classList.add('note-list')
+const itemNotesList=noteList.map(item=>`<li id='noteItem' class='note-item' >${item}</li>`).join("")
+containNotesElement.innerHTML=itemNotesList
+const noteItemElement=document.getElementById('noteItem')
 
 
 //save notes in local storage
@@ -140,7 +77,7 @@ containNotesElement.classList.add('note-list')
 
 //add favorites 
 
-//copy notes 
+//copy note 
 
-//edit notes
+//edit note
 //delete note
