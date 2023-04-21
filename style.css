@@ -114,35 +114,72 @@ body{
   text-align: center;
 }
 
-.note-write{
-  background-color: var(--silver);
-}
-
 .search{
   text-align: center;
 }
 
-.searchNote{
-  background-color: var(--grey);
-}
-
 .search-input{
   background-color: var(--grey);
-  border-color: var(--grey);
+  border-color: var(--silver);
+  border-radius: 6px;
   height: 2rem;
   width: 900px;
   color: var(--white);
   font-family: var(--type-font);
+  margin-top: 3rem;
+  padding: 1rem 1.5rem;
 }
 
 button{
-  background-color: var(--silver);
-  padding: 1rem;
+  background-color: var(--black);
+  margin-top: 4px;
+  width: 900px;
+  /* height: 1.5rem; */
+  border-radius: 6px;
 }
 
-.fa fa-search{
-  background-color: var(--silver);
-  height: 1rem;
-  color: #E6E6E6;
+
+.search-button{
+  background-color: var(--black);
+
+}
+/* .search-button:hover{
+  background-color: var(--white);
+  cursor: pointer;
+} */
+.search-button:hover,
+.search-button #img:hover{
+  background-color: var(--white);
+  color: var(--black);
+  cursor: pointer;
+  border-color: #424242;
+
 }
 
+
+#img{
+  background-color: var(--grey);
+  color: var(--white);
+  width: 890px;
+  height: 15px;
+  border-radius: 6px;
+
+}
+/* #img:hover{
+  background-color: var(--white);
+  color: var(--black);
+  cursor: pointer;
+} */
+
+.note-list{
+  background-color: var(--black);
+  padding: 1rem 1.5rem;
+  margin-top: 3rem;
+  width: 900px;
+  border-radius: 6px;
+
+}
+
+.note-list:hover{
+  background-color: var(--silver);
+}

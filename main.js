@@ -25,75 +25,122 @@ import './style.css'
 
 
 
+/*
+// const searchElement=document.getElementById("search")
+// const notesWrittenElement=document.getElementById('notesWritten')
+// const imgElement=document.getElementById('img')
 
-const searchElement=document.getElementById("search")
-const notesWrittenElement=document.getElementById('notesWritten')
+// const favoritesElement=document.getElementById('favorites')
+// const newNoteElement=document.getElementById('newNote')
 
-const favoritesElement=document.getElementById('favorites')
-const newNoteElement=document.getElementById('newNote')
+// const noteList=[]
 
-const noteList=[]
+// // guardar nota en local Storage
 
-// guardar nota en local Storage
+// // poder buscar
+// function filterNote(noteList){
+//   noteList.filter
+// }
 
-// poder buscar
-function filterNote(noteList){
-  noteList.fil
-}
+// // const 
+// const searchInputElement = document.createElement('input')
+// const searchButtonElement = document.createElement('button')
+// const searchImgElement = document.createElement('img')
+// searchInputElement.classList.add('search-input')
+// searchButtonElement.classList.add('search-button')
+// // searchImgElement.classList.add('search-img')
+// // searchImgElement.setAttribute('src', search.image)
+// searchImgElement.addEventListener('click',filterNote )
 
-// const 
-const searchInputElement = document.createElement('input')
-const searchButtonElement = document.createElement('button')
-const searchImgElement = document.createElement('img')
-searchInputElement.classList.add('search-input')
-searchButtonElement.classList.add('search-button')
-searchImgElement.classList.add('search-img')
-searchImgElement.setAttribute('src', search.image)
-searchImgElement.addEventListener('click',filterNote )
-
-searchElement.appendChild(searchInputElement)
-searchElement.appendChild(searchButtonElement)
-searchButtonElement.appendChild(searchImgElement)
+// searchElement.appendChild(searchInputElement)
+// searchElement.appendChild(searchButtonElement)
+// // searchButtonElement.appendChild(searchImgElement)
 
 
-// poder agregar una nota
+// // poder agregar una nota
 
-noteList.push({
-  
-})
 
-function renderNote(array){
-  for(element of array){
-    const element=document.createElement('textarea')
-    noteWrite.classList.add('note-write')
+// noteList.push(newNote)
+
+// function renderNote(array){
+//   for(element of array){
+//     const element=document.createElement('textarea')
+//     noteWrite.classList.add('note-write')
     
-    notesWrittenElement.appendChild(noteWrite)
+//     notesWrittenElement.appendChild(noteWrite)
 
-  }
-}
-
+//   }
+// }
+// renderNote(noteList)
 // poder copiar una nota
-
-
 // poder editar una nota
-
-
 // poder borrar una nota
-
-
 // responsive desing
-
-
 // poder agregar a favoritos
+*/
 
 
-// 
+// searcher
+
+// const searchElement=document.getElementById('search')
+const containInputElement=document.getElementById('containSInput')
+const containButtonElement=document.getElementById('containSButton')
 
 
+const roundedInput=({id,type,placeholder,name})=>{
+  return`
+  <input type='${type}' id='${id}' placeholder='${placeholder}' name='${name}'>
+    
+  </input>
+  `
+}
+containInputElement.innerHTML=roundedInput({id:'searchInput',type:'search',placeholder:'write note',name:'searchInput'})
+const searchInputElement=document.getElementById('searchInput')
+searchInputElement.classList.add('search-input')
+// searchInputElement.style.background=red;
+
+const roundedButton=({id,children,onclick})=>{
+  return`
+  <button id='${id}'>
+    ${children}
+  </button>
+  `
+};
+containButtonElement.innerHTML=roundedButton({id:'searchButton',onclick, children:'<i id="img" class="fa fa-search" aria-hidden="true"></i>'})
+const searchButtonElement=document.getElementById('searchButton')
+searchButtonElement.classList.add('search-button')
+
+//notes list
+const containNotesElement=document.getElementById('containNotes')
+
+const noteList=[];
+noteList.push('recommendation read the odyssey')
+noteList.push('watch the series silicon valley')
+noteList.push('search tuberculosis articles')
+
+const renderNotes=({noteList,id})=>{
+  return`
+
+  <div id='${id}'>
+  ${noteList}
+  </div>
+  `
+}
+containNotesElement.innerHTML=renderNotes({id:'note',noteList})
+containNotesElement.classList.add('note-list')
 
 
+//save notes in local storage
+
+//responsive
 
 
+//add favorites 
 
 
+//add favorites 
 
+//copy notes 
+
+//edit notes
+//delete note
