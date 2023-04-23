@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Note App</title>
-  </head>
-  <body>
-    <div id="contain" class="contain">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Note App</title>
+</head>
+
+<body>
+  <div id="contain" class="contain">
     <!-- <div id="app"></div> -->
 
     <h1 class="title-1">my notes</h1>
-    
-<!-- SEARCHER -->
-<div id="new-note" class="new-note">
-  <input id="new-note-input" type="text" class="new-note-input">
-  <button id="new-note-button" class="new-note-button">x</button>
-</div>
+
+    <!-- SEARCHER -->
+    <div id="new-note" class="new-note">
+      <input id="new-note-input" type="text" class="new-note-input">
+      <button id="new-note-button" class="new-note-button">x</button>
+    </div>
 
     <div id="search" class="search">
       <input id="search-input" type="text" class="search-input">
       <button id="search-button" class="search-button">x</button>
     </div>
-<!-- NOTES LIST -->
+    <!-- NOTES LIST -->
     <div>
       <ul id="contain-notes" class="contain-notes">
         <!-- <li id="noteItem" class="note-item"></li> -->
       </ul>
     </div>
-<!-- EDIT NOTE -->
-    
-      <!-- <div id="notesWritten" class="note-write"></div> -->
-    
-    
-<!-- CONTAIN BUTTONS -->
-    <div id="containButtons" class="contain-buttons">
-      <!-- BUTTON OF FAVORITES -->
-      <button id="favorites-note" >f</button>
-      <!-- BUTTON FOR ADD NOTE -->
-     <button id="add-note">+</button>
-    </div>
+    <!-- EDIT NOTE -->
 
-    </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+    <!-- <div id="notesWritten" class="note-write"></div> -->
+
+
+    
+
+  </div>
+
+  <!-- CONTAIN BUTTONS -->
+  <div id="containButtons" class="contain-buttons">
+    <!-- BUTTON OF FAVORITES -->
+    <button id="favorites-note">f</button>
+    <!-- BUTTON FOR ADD NOTE -->
+    <button id="add-note">+</button>
+  </div>
+  
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

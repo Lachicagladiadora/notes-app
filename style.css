@@ -96,6 +96,12 @@ button:focus-visible {
   }
 } */
 
+*{
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
 :root{
   --silver:#424242; /*0.75*/
   --grey:#1C1C1C; /*0.87*/
@@ -108,6 +114,10 @@ body{
   background-color: var(--grey);
   font-family: var(--type-font);
   color: var(--white);
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  border: solid 2px royalblue;
 }
 
 .contain{
@@ -185,6 +195,7 @@ body{
 /* CONTAIN NOTES LIST (ul) */
 .contain-notes{
   list-style: none;
+  padding: 0px;
 }
 
 /* NOTES LIST */
@@ -192,7 +203,7 @@ body{
   background-color: var(--black);
   padding: 1rem 1.5rem;
   margin: 1rem auto;
-  width: 900px;
+  position: relative;
   border-radius: 6px;
   text-align: center;
   
@@ -204,56 +215,46 @@ body{
   color: var(--yellow);
 }
 
-
-/* BUTTON OF FAVORITES AND ADD */
-/* .contain-notes{
-  float: right;
+/* NOTE ITEM OPTIONS */
+.hide{
+  display: none;
   
-  bor
-} */
-
-.favorites{
-  float: right;
 }
 
-.add-notes{
-  float: right;
+.note-item-options{
+  background-color: var(--yellow);
+  padding: 4px;
+  border-radius: 8px;
+  position: absolute;
+  right: 0px;
+  top: -10px;
+
+}
+
+.note-item-options button{
+  background-color: var(--yellow);
+  color: var(--white);
+  border-radius: 6px;
+  border-color: var(--black);
+}
+
+.note-item-options button{
+  font-size: 20px;
+  border: none;
+  color: var(--grey);
+}
+
+/* CONTAIN BUTTONS FAVORITES AND ADD */
+.contain-buttons{
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
 
 /* BUTTON OF FAVORITES */
-.button-favorites {
-  height: 3.5rem;
-  width: 3.5rem;
-  border-style: initial;
-  border-radius: 50%;
-  box-sizing: border-box;
-  align-content: center;
-  appearance: initial;
-  background-color: var(--black);
-  cursor: pointer;
-}
 
-div .fa{
-  text-align: center;
-  font-size: 30px;
-  color: var(--white);
-  background-color: var(--black);
-  border-radius: 50%;
-  padding: 10px;
-}
-
-.button-favorites:hover,
-div .fa:hover{
-  background-color: var(--silver);
-  color: var(--yellow);
-}
 
 /* BUTTON FOR ADD */
 
-.contain-notes{
-  border: solid 2px red;
-}
 
-.hide{
-  display: none;
-}
+/*  */

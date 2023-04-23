@@ -67,13 +67,33 @@ const addNotes=()=>{
  localStorage.setItem('notes',JSON.stringify(newNotes))
  notes=newNotes
  newNoteInputElement.value=''
- displayNotes(Object.values(notes))
+ displayNotes(getNotes())
 }
 
-const renderNote=(note)=>`<li id="noteItem" class="note-item">${note}</li>`
+const getNotes = ()=>Object.keys(notes).reduce((acu,cur)=>([...acu,{id:cur,note:notes[cur]}]),[])
+
+const renderNote=({note,id})=>`<li id='${id}-container' class="note-item">
+  <span id='${id}-note'>${note}</span>
+  <div id='${id}-note-options' class="note-item-options">
+    <button><i class="fa fa-star" aria-hidden="true"></i></button>
+    <button><i class="fa fa-clone" aria-hidden="true"></i></button>
+    <button><i class="fa fa-pencil" aria-hidden="true"></i></button>
+    <button><i class="fa fa-trash" aria-hidden="true"></i></button>
+  </div>
+</li>`
 const displayNotes=(notes)=>{
   containNotesElement.innerHTML=notes.map((cur)=>renderNote(cur)).join('')
 }
+//id='${id}-01'  id='${id}-02'  id='${id}-03'
+//(id)
+//id:01
+// 01-note-container  
+// 01-note
+// 01-note-options
+
+// 02-note-container  
+// 02-note
+// 02-note-options
 
 // console.log('3')
 
@@ -81,8 +101,32 @@ const displayNotes=(notes)=>{
 addNoteElement.addEventListener('click',onToggleNotesOptionsVisibility)
 newNoteButtonElement.addEventListener('click',addNotes)
 
+
 //initial function
-displayNotes(Object.values(notes))
+console.log({notes})
+console.log({tt:Object.keys(notes)})
+displayNotes(getNotes())
+Object.keys(notes).forEach(cur=>{
+
+  const noteContainerId=`${cur}-container`
+  const noteOptionsId=`${cur}-note-options`
+
+  const noteItemElement=document.getElementById(noteContainerId)
+  const noteOptionsElement=document.getElementById(noteOptionsId)
+
+  if(!noteItemElement)return console.warn(`element with id "${noteContainerId}" does not exist `)
+  if(!noteOptionsElement)return console.warn(`element with id "${noteOptionsId}" does not exist `)
+
+  const onHideNoteOptions=()=>{
+    noteOptionsElement.classList.add('hide')
+    console.log("hiden")
+  }
+  const onShowNoteOptions=()=>noteOptionsElement.classList.remove('hide')
+
+  noteItemElement.addEventListener('mouseenter',onShowNoteOptions)
+  noteItemElement.addEventListener('mouseleave',onHideNoteOptions)
+
+})
 
 }
 
