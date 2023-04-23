@@ -8,36 +8,40 @@
     <title>Note App</title>
   </head>
   <body>
-    <div id="contain">
+    <div id="contain" class="contain">
     <!-- <div id="app"></div> -->
 
     <h1 class="title-1">my notes</h1>
     
 <!-- SEARCHER -->
+<div id="new-note" class="new-note">
+  <input id="new-note-input" type="text" class="new-note-input">
+  <button id="new-note-button" class="new-note-button">x</button>
+</div>
+
     <div id="search" class="search">
-      <div id="containSInput"></div>
-      <div id="containSearchconButton"></div>
+      <input id="search-input" type="text" class="search-input">
+      <button id="search-button" class="search-button">x</button>
     </div>
 <!-- NOTES LIST -->
     <div>
-      <ul id="containNotes" class="contain-notes">
+      <ul id="contain-notes" class="contain-notes">
         <!-- <li id="noteItem" class="note-item"></li> -->
       </ul>
     </div>
 <!-- EDIT NOTE -->
     
-      <div id="notesWritten" class="note-write"></div>
+      <!-- <div id="notesWritten" class="note-write"></div> -->
     
     
 <!-- CONTAIN BUTTONS -->
     <div id="containButtons" class="contain-buttons">
       <!-- BUTTON OF FAVORITES -->
-      <div id="favorites" class="favorites"></div>
+      <button id="favorites-note" >f</button>
       <!-- BUTTON FOR ADD NOTE -->
-      <div id="addNote" class="add-notes"></div>
+     <button id="add-note">+</button>
     </div>
 
-    <a href=""></a>
     </div>
     <script type="module" src="/main.js"></script>
   </body>

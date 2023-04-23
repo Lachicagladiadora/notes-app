@@ -109,6 +109,12 @@ body{
   font-family: var(--type-font);
   color: var(--white);
 }
+
+.contain{
+  border: solid 2px royalblue;
+  max-width: 900px;
+  margin: auto;
+}
 /* TITLE */
 .title-1{
   text-align: center;
@@ -118,6 +124,9 @@ body{
 /* SEARCHER */
 .search{
   text-align: center;
+  display: flex;
+  width: 100%;
+  border: solid 2px pink;
 }
 
 .search-input{
@@ -125,23 +134,23 @@ body{
   border-color: var(--silver);
   border-radius: 6px;
   height: 2rem;
-  width: 900px;
+  width: 100%;
   color: var(--white);
   font-family: var(--type-font);
-  margin-top: 3rem;
-  padding: 1rem 1.5rem;
+  /* margin-top: 3rem; */
+  /* padding: 1rem 1.5rem; */
 }
 .search-input:hover{
   background-color: var(--silver);
-  border-color: var(--black);
-  
+  border-color: var(--black); 
 }
 
 /* BUTTON OF SEARCHER */
 .search-button{
   background-color: var(--grey);
   margin-top: 6px;
-  width: 900px;
+  /* width-max: 90px; */
+  
   /* height: 1.5rem; */
   border-radius: 6px;
   border-color: var(--black);
@@ -197,10 +206,11 @@ body{
 
 
 /* BUTTON OF FAVORITES AND ADD */
-.contain-notes{
+/* .contain-notes{
   float: right;
-  /* width: 30px; */
-}
+  
+  bor
+} */
 
 .favorites{
   float: right;
@@ -212,7 +222,6 @@ body{
 
 /* BUTTON OF FAVORITES */
 .button-favorites {
-  /* float: right; */
   height: 3.5rem;
   width: 3.5rem;
   border-style: initial;
@@ -240,3 +249,11 @@ div .fa:hover{
 }
 
 /* BUTTON FOR ADD */
+
+.contain-notes{
+  border: solid 2px red;
+}
+
+.hide{
+  display: none;
+}
