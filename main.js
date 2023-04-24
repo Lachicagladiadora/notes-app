@@ -33,7 +33,6 @@ let notes=JSON.parse(localStorage.getItem('notes'))
 //primero obtener elementos
 const searchInputElement=document.getElementById('search-input')
 const searchButtonElement=document.getElementById('search-button')
-const favoritesNoteElement=document.getElementById('favorites-note')
 const addNoteElement=document.getElementById('add-note')
 const newNoteElement=document.getElementById('new-note')
 const newNoteButtonElement=document.getElementById('new-note-button')
@@ -45,7 +44,6 @@ const containNotesElement=document.getElementById('contain-notes')
 //validate
 if(!searchInputElement)return console.warn('element with id "search-input" does not exist ')
 if(!searchButtonElement)return console.warn('element with id "search-button" does not exist ')
-if(!favoritesNoteElement)return console.warn('element with id "favorites-note" does not exist ')
 if(!addNoteElement)return console.warn('element with id "add-note" does not exist ')
 if(!newNoteElement)return console.warn('element with id "new-note" does not exist ')
 if(!newNoteButtonElement)return console.warn('element with id "new-note-button" does not exist ')
@@ -75,31 +73,23 @@ const getNotes = ()=>Object.keys(notes).reduce((acu,cur)=>([...acu,{id:cur,note:
 const renderNote=({note,id})=>`<li id='${id}-container' class="note-item">
   <span id='${id}-note'>${note}</span>
   <div id='${id}-note-options' class="note-item-options">
-    <button><i class="fa fa-star" aria-hidden="true"></i></button>
-    <button><i class="fa fa-clone" aria-hidden="true"></i></button>
-    <button><i class="fa fa-pencil" aria-hidden="true"></i></button>
-    <button><i class="fa fa-trash" aria-hidden="true"></i></button>
+    <button><i id='copy-note' class="fa fa-clone" aria-hidden="true"></i></button>
+    <button><i id='edit-note' class="fa fa-pencil" aria-hidden="true"></i></button>
+    <button><i id='delete-note' class="fa fa-trash" aria-hidden="true"></i></button>
   </div>
 </li>`
 const displayNotes=(notes)=>{
   containNotesElement.innerHTML=notes.map((cur)=>renderNote(cur)).join('')
 }
-//id='${id}-01'  id='${id}-02'  id='${id}-03'
-//(id)
-//id:01
-// 01-note-container  
-// 01-note
-// 01-note-options
-
-// 02-note-container  
-// 02-note
-// 02-note-options
-
 // console.log('3')
 
 //eventos
 addNoteElement.addEventListener('click',onToggleNotesOptionsVisibility)
 newNoteButtonElement.addEventListener('click',addNotes)
+// copyNoteElement.addEventListener('click',)
+// editNoteElement.addEventListener('click',)
+// deleteNoteElement.addEventListener('click',)
+
 
 
 //initial function

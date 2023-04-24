@@ -103,9 +103,10 @@ button:focus-visible {
 }
 
 :root{
+  --white:#E6E6E6; /*0.25*/
+  --gunmetal:#848484; /*0.5*/
   --silver:#424242; /*0.75*/
   --grey:#1C1C1C; /*0.87*/
-  --white:#E6E6E6; /*0.25*/
   --black:#141414; /*0.90*/
   --yellow:#debe49; /*amarillo*/
   --type-font: monospace;
@@ -128,6 +129,8 @@ body{
 /* TITLE */
 .title-1{
   text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 
@@ -136,61 +139,50 @@ body{
   text-align: center;
   display: flex;
   width: 100%;
-  border: solid 2px pink;
+  border: solid 2px rgb(112, 200, 112);
+  padding-bottom: 2rem;
 }
 
 .search-input{
+  border-style: none;
+  padding-left: 10px;
   background-color: var(--grey);
-  border-color: var(--silver);
+  border-color: var(--black);
   border-radius: 6px;
   height: 2rem;
   width: 100%;
   color: var(--white);
   font-family: var(--type-font);
-  /* margin-top: 3rem; */
-  /* padding: 1rem 1.5rem; */
+  
 }
 .search-input:hover{
   background-color: var(--silver);
-  border-color: var(--black); 
+  border-color: var(--grey); 
+  color: var(--white);
+  text-shadow: 1px 1px 1px #141414;
 }
 
 /* BUTTON OF SEARCHER */
 .search-button{
-  background-color: var(--grey);
-  margin-top: 6px;
-  /* width-max: 90px; */
-  
-  /* height: 1.5rem; */
-  border-radius: 6px;
+  background-color: var(--black);
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
   border-color: var(--black);
   border-style: double;
-}
-
-.search-button{
-  background-color: var(--grey);
-  border-color: var(--black);
-  margin-bottom: 3rem;
+  color: var(--white);
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 .search-button:hover,
 .search-button #img:hover{
   background-color: var(--silver);
-  color: var(--black);
+  color: var(--yellow);
   cursor: pointer;
   border-color: #424242;
 
 }
-
-#img{
-  background-color: var(--grey);
-  color: var(--white);
-  width: 890px;
-  height: 15px;
-  border-radius: 6px;
-
-}
-
 
 /* CONTAIN NOTES LIST (ul) */
 .contain-notes{
@@ -211,7 +203,7 @@ body{
 
 .note-item:hover{
   background-color: var(--silver);
-  font-size: 110%;
+  font-size: 112%;
   color: var(--yellow);
 }
 
@@ -222,39 +214,86 @@ body{
 }
 
 .note-item-options{
-  background-color: var(--yellow);
+  background-color: var(--grey);
   padding: 4px;
   border-radius: 8px;
   position: absolute;
   right: 0px;
   top: -10px;
-
 }
 
 .note-item-options button{
-  background-color: var(--yellow);
-  color: var(--white);
+  border: none;
+  background-color: var(--grey);
+  color: var(--yellow);
   border-radius: 6px;
   border-color: var(--black);
-}
-
-.note-item-options button{
   font-size: 20px;
-  border: none;
-  color: var(--grey);
 }
 
-/* CONTAIN BUTTONS FAVORITES AND ADD */
+.note-item-options button fa fa-clone:hover{
+  font-size: 120%;
+}
+.note-item-options button fa fa-pencil:hover{
+  font-size: 120%;
+}
+.note-item-options button fa fa-trash:hover{
+  font-size: 120%;
+
+}
+
+/* CONTAIN BUTTONS FOR ADD */
 .contain-buttons{
   position: absolute;
-  bottom: 0px;
-  right: 0px;
+  bottom: 20px;
+  right: 20px;
+  border:solid 2px orangered;
+  /* margin-left: 5px; */
 }
 
-/* BUTTON OF FAVORITES */
+/* BUTTON FOR ADD*/
+.add-note{
+  background-color: var(--yellow);
+  color: var(--grey);
+  font-size: 30px;
+  padding: 10px;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 25px;
+  text-align: center;
+}
 
+.add-note:hover{
+  background-color: var(--black);
+  color: var(--yellow);
+  border: solid 1px #debe49;
+}
 
-/* BUTTON FOR ADD */
+/* NEW NOTE */
+.new-note{
+  border: solid 3px #9f0795;
+  background-color: var(--black);
+  text-align: center;
+}
 
+.new-note-input{
+  border: none;
+  background-color: var(--yellow);
+  height: 2rem;
+  width: 93%;
+  padding-left: 25px;
+  border-radius: 1rem;
+}
+
+.new-note-button{
+  border: none;
+  border-radius: 1rem;
+  background-color: var(--yellow);
+  height: 2rem;
+  width: 2rem;
+  margin-left: 5px;
+}
+  
 
 /*  */

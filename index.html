@@ -17,15 +17,20 @@
 
     <h1 class="title-1">my notes</h1>
 
-    <!-- SEARCHER -->
+<!-- NEW NOTE -->
     <div id="new-note" class="new-note">
       <input id="new-note-input" type="text" class="new-note-input">
-      <button id="new-note-button" class="new-note-button">x</button>
+      <button id="new-note-button" class="new-note-button">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
     </div>
-
+    
+<!-- SEARCHER -->
     <div id="search" class="search">
-      <input id="search-input" type="text" class="search-input">
-      <button id="search-button" class="search-button">x</button>
+      <input id="search-input" type="text" class="search-input" placeholder="write note">
+      <button id="search-button" class="search-button">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
     </div>
     <!-- NOTES LIST -->
     <div>
@@ -45,9 +50,13 @@
   <!-- CONTAIN BUTTONS -->
   <div id="containButtons" class="contain-buttons">
     <!-- BUTTON OF FAVORITES -->
-    <button id="favorites-note">f</button>
+    <!-- <button id="favorites-note" class="favorites-note"> -->
+      <!-- <i class="fa fa-star" aria-hidden="true"></i> -->
+    <!-- </button> -->
     <!-- BUTTON FOR ADD NOTE -->
-    <button id="add-note">+</button>
+    <button id="add-note" class="add-note">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
   </div>
   
   <script type="module" src="/main.js"></script>
