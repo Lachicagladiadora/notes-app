@@ -38,7 +38,9 @@ const newNoteElement=document.getElementById('new-note')
 const newNoteButtonElement=document.getElementById('new-note-button')
 const newNoteInputElement=document.getElementById('new-note-input')
 const containNotesElement=document.getElementById('contain-notes')
-// console.log('1')
+
+
+// console.log('1') //
 
 
 //validate
@@ -50,11 +52,12 @@ if(!newNoteButtonElement)return console.warn('element with id "new-note-button" 
 if(!newNoteInputElement)return console.warn('element with id "new-note-input" does not exist ')
 if(!containNotesElement)return console.warn('element with id "contain-notes" does not exist ')
 
-// console.log('2')
+
+// console.log('2') //
 
 //functions
 const onToggleNotesOptionsVisibility=()=>{
-  newNoteElement.classList.toggle('hide',)
+  newNoteElement.classList.toggle('hide')
 }
 
 const addNotes=()=>{
@@ -67,12 +70,13 @@ const addNotes=()=>{
  newNoteInputElement.value=''
  displayNotes(getNotes())
 }
+// console.log('3') //
 
 const getNotes = ()=>Object.keys(notes).reduce((acu,cur)=>([...acu,{id:cur,note:notes[cur]}]),[])
 
 const renderNote=({note,id})=>`<li id='${id}-container' class="note-item">
   <span id='${id}-note'>${note}</span>
-  <div id='${id}-note-options' class="note-item-options">
+  <div id='${id}-note-options' class="note-item-options hide">
     <button><i id='copy-note' class="fa fa-clone" aria-hidden="true"></i></button>
     <button><i id='edit-note' class="fa fa-pencil" aria-hidden="true"></i></button>
     <button><i id='delete-note' class="fa fa-trash" aria-hidden="true"></i></button>
@@ -81,23 +85,85 @@ const renderNote=({note,id})=>`<li id='${id}-container' class="note-item">
 const displayNotes=(notes)=>{
   containNotesElement.innerHTML=notes.map((cur)=>renderNote(cur)).join('')
 }
-// console.log('3')
+
+console.log('4') //
+//SEARCHER
+const searchingNote=()=>{
+  // const noteId=`${id}-note`
+  const searchInputValueElement=searchInputElement.value
+  const savedNoteElement=JSON.parse(localStorage.getItem('notes'))
+  console.log('5') //
+  if(!searchInputValueElement)return console.warn('element with id ("search-input").value does not exist ')
+  if(!savedNoteElement)return console.warn('element with id "noteId" does not exist ')
+
+  const onFilteredNotes = Object.keys(savedNoteElement).filter((key) => {
+    const note = savedNoteElement[key];
+    return note.includes(searchInputValueElement);
+  });
+  if (onFilteredNotes.length > 0) {
+    renderNotes(onFilteredNotes, savedNoteElement);
+  } else {
+    console.info('No notes found with the given search term');
+  }
+}
+console.log('6') //
+const renderNotes = (filteredNotes, savedNoteElement) => {
+  // const containNotesElement = document.getElementById('${id}-container')
+  containNotesElement.innerHTML = filteredNotes
+    .map((key) => {
+      // Renderizar cada nota encontrada
+      return`<li id='${key}-container' class="note-item">
+      <span id='${key}-note'>${savedNoteElement[key]}</span>
+      <div id='${key}-note-options' class="note-item-options hide">
+        <button><i id='copy-note' class="fa fa-clone" aria-hidden="true"></i></button>
+        <button><i id='edit-note' class="fa fa-pencil" aria-hidden="true"></i></button>
+        <button><i id='delete-note' class="fa fa-trash" aria-hidden="true"></i></button>
+      </div>
+    </li>`
+    }).join('')
+}
+console.log('7') //
+
+// EDIT
+// const editNoteContain=document.getElementById('edit-note')
+// const containKey=Object.keys(containNotesElement)
+// const noteKey=Object.keys(notes)
+// const noteElement=document.getElementById(`${noteKey}-note`)
+// const onEditNote=()=>{
+//   return`
+//   <li id='${containKey}' class='contain-notes'>
+//     <input id='${noteKey}' class='edit-input' placeholder='write your change note'>
+//       '${noteElement}'
+//     </input>
+//     <button id='edit-button-finalized' class='edit-button-finalized'>
+//       <i class="fa fa-check" aria-hidden="true"></i>
+//     </button>
+//   </li>
+//   `
+// }
+// const editNote=()=>{
+//   containNotesElement.innerHTML=notes.map((onEditNote)=>renderNote(noteKey)).join('')
+// }
+
+//const deleteNote()=>
 
 //eventos
+searchButtonElement.addEventListener('click',searchingNote)
 addNoteElement.addEventListener('click',onToggleNotesOptionsVisibility)
 newNoteButtonElement.addEventListener('click',addNotes)
 // copyNoteElement.addEventListener('click',)
-// editNoteElement.addEventListener('click',)
+// editNoteContain.addEventListener('click',editNote)
 // deleteNoteElement.addEventListener('click',)
 
 
 
 //initial function
 console.log({notes})
-console.log({tt:Object.keys(notes)})
-displayNotes(getNotes())
-Object.keys(notes).forEach(cur=>{
+console.log({notesIds:Object.keys(notes)})
 
+displayNotes(getNotes())
+
+Object.keys(notes).forEach(cur=>{
   const noteContainerId=`${cur}-container`
   const noteOptionsId=`${cur}-note-options`
 
@@ -115,15 +181,11 @@ Object.keys(notes).forEach(cur=>{
 
   noteItemElement.addEventListener('mouseenter',onShowNoteOptions)
   noteItemElement.addEventListener('mouseleave',onHideNoteOptions)
-
 })
 
 }
 
-
-
-
-// console.log('4')
+console.log('find')
 start()
 // SEARCHER
 
