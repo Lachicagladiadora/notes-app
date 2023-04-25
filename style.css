@@ -243,14 +243,15 @@ body{
 }
 
 .note-item-options button:hover{
-  font-size: 120%;
+  /* font-size: 120%; */
+  /* border: solid 2px red; */
+  color: var(--white);
 }
 /* .note-item-options button fa fa-pencil:hover{
   font-size: 120%;
 }
 .note-item-options button fa fa-trash:hover{
   font-size: 120%;
-
 } */
 
 /* CONTAIN BUTTONS FOR ADD */
@@ -327,6 +328,7 @@ body{
 .new-note-button:hover{
   background-color: var(--black);
   color: var(--white);
+  border: solid 3px #debe49;
 }
   
 
