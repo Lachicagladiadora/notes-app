@@ -302,7 +302,7 @@ body{
   background-color: var(--black);
   color: var(--white);
   height: 4rem;
-  width: 90%;
+  max-width: 90%;
   padding-left: 25px;
   border-radius: 0.7rem;
   font-weight: bold;
