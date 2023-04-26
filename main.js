@@ -217,21 +217,29 @@ const start = () => {
   console.log('delete')
 
   //COPY
-
   Object.keys(notes).forEach(key => {
     const noteId = `${key}-note`
     const buttonCopyNoteId = `${key}-copy-note`
+    const noteOptionsId = `${key}-note-options`
 
     const noteElement = document.getElementById(noteId)
     const buttonCopyNote = document.getElementById(buttonCopyNoteId)
+    const noteOptionsElement = document.getElementById(noteOptionsId)
 
     if (!noteElement) return console.warn(`element with id "${noteId}" does not exist `)
     if (!buttonCopyNote) return console.warn(`element with id "${buttonCopyNoteId}" does not exist `)
+    if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
 
     const onCopyNote = (noteValue) => {
-      navigator.clipboard.writeText(noteValue);
+      navigator.clipboard.writeText(noteValue)
+      const onHideNoteOptions = () => {
+        noteOptionsElement.classList.add('hide')
+        console.log("hiden")
+      }
+
+      buttonCopyNote.addEventListener('click', onHideNoteOptions)
     }
-    
+
     buttonCopyNote.addEventListener('click', () => onCopyNote(notes[key]))
     
   })
