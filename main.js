@@ -33,22 +33,35 @@ const start = () => {
   const onToggleNotesOptionsVisibility = () => {
     newNoteElement.classList.toggle('hide')
   }
-// add notes: event outside the notes
+
+// ADD NOTES: event outside the notes
   const addNotes = () => {
     const notes = getNotesObject()
     const newNote = newNoteInputElement.value
+    
     const id = Math.round(Math.random() * 1000000)
     const newNotes = { ...notes, [id]: newNote }
+
+    if (newNote=== '') return alert('please enter at least one character')
+    if (newNote=== ' ') return alert('please enter at least one character')
+
     setNotesObject(newNotes)
     newNoteInputElement.value = ''
     displayNotes(getNotesArray())
-
+    
   }
 
+  const onHideAddNoteElement = () => addNoteElement.classList.add('hide')
   const onHideEditNote = () => newNoteElement.classList.add('hide')
+
+  const onShowAddNoteElement = () => addNoteElement.classList.remove('hide')
   
+  addNoteElement.addEventListener('mouseup',onHideAddNoteElement)
   newNoteButtonElement.addEventListener('mouseup',onHideEditNote)
   cancelNewNoteElement.addEventListener('click',onHideEditNote)
+  
+  newNoteButtonElement.addEventListener('mouseup',onShowAddNoteElement)
+  cancelNewNoteElement.addEventListener('click',onShowAddNoteElement)
 
 
 // "id" update in notes and visibility in the screen
@@ -80,7 +93,8 @@ const start = () => {
       return noteElement
     }).join('')
   }
-// ADD EVENTS IN NOTES (EVENTOS EN LAS NOTAS)
+
+  // ADD EVENTS IN NOTES (EVENTOS EN LAS NOTAS)
   const addEventsOnNotes = (notes) => {
     Object.keys(notes).forEach(cur => {
       const noteContainerId = `${cur}-container`
@@ -88,18 +102,21 @@ const start = () => {
       const buttonCopyNoteId = `${cur}-copy-note`
       const buttonDeleteNoteId = `${cur}-delete-note`
       const buttonEditNoteId = `${cur}-edit-note`
+
     // selection
       const noteItemElement = document.getElementById(noteContainerId)
       const noteOptionsElement = document.getElementById(noteOptionsId)
       const buttonCopyNote = document.getElementById(buttonCopyNoteId)
       const buttonDeleteNote = document.getElementById(buttonDeleteNoteId)
       const buttonEditNoteElement = document.getElementById(buttonEditNoteId)
+
     //validate
       if (!noteItemElement) return console.warn(`element with id "${noteContainerId}" does not exist `)
       if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
       if (!buttonCopyNote) return console.warn(`element with id "${buttonCopyNoteId}" does not exist `)
       if (!buttonDeleteNote) return console.warn(`element with id "${buttonDeleteNoteId}" does not exist `)
       if (!buttonEditNoteElement) return console.warn(`element with id "${buttonEditNoteId}" does not exist `)
+      
       // note options visibility
       const onHideNoteOptions = () => noteOptionsElement.classList.add('hide')
 
@@ -144,7 +161,7 @@ const start = () => {
         if (!saveNoteElement) return console.warn('cant find save note id')
         if (!cancelEditNoteElement) return console.warn('cant find save note id')
 
-        const onHideEditNote = () => newNoteElement.classList.add('hide')
+        // const onHideEditNote = () => newNoteElement.classList.add('hide')
 
         saveNoteElement.addEventListener('click', () => addUpdate({ id }))
         // cancelEditNoteElement.addEventListener('click',()=> addNotes)
@@ -164,12 +181,26 @@ const start = () => {
     if (!searchInputValue) return displayNotes(getNotesArray())
 
     const notesFiltered = getNotesArray().filter(note => note.note.includes(searchInputValue))
+
     displayNotes(notesFiltered)
+
   }
 // EVENTS OUTSIDE THE NOTES
+  const eventOfKey = (event) => {
+    // if ()
+    if (event.key === "Enter") {
+      event.preventDefault()
+      searchButtonElement.click()
+    }
+    searchingNote
+  }
+
   searchButtonElement.addEventListener('click', searchingNote)
   addNoteElement.addEventListener('click', onToggleNotesOptionsVisibility)
   newNoteButtonElement.addEventListener('click', addNotes)
+
+  searchInputElement.addEventListener("keypress",eventOfKey)
+  searchInputElement.addEventListener("keyup",searchingNote)
   
   displayNotes(getNotesArray())
   addEventsOnNotes(getNotesObject())
@@ -186,4 +217,4 @@ start()
 // - search on every key pressed
 // - show a message confirmation (alert) before to delete a note
 // - add mouse: pointer in all clickable elements
-// - add footer, with creator and year
+// - add footer, with creator and yearconst keyBoard = Event.key
