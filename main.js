@@ -1,33 +1,15 @@
 import './style.css'
 
-// import javascriptLogo from './javascript.svg'
-// import viteLogo from '/vite.svg'
-// import { setupCounter } from './counter.js'
-
-// document.querySelector('#app').innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="${viteLogo}" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//     </a>
-//     <h1>Hello Vite!</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite logo to learn more
-//     </p>
-//   </div>
-// `
-// setupCounter(document.querySelector('#counter'))
-
-
+const getNotesObject = () => JSON.parse(localStorage.getItem('notes'))
+const getNotesArray = () => {
+  const notes = getNotesObject()
+  return Object.keys(notes).reduce((acu, cur) => ([...acu, { id: cur, note: notes[cur] }]), [])
+}
+const setNotesObject = (notesObject) => localStorage.setItem('notes', JSON.stringify(notesObject))
 
 const start = () => {
   //variables
-  let notes = JSON.parse(localStorage.getItem('notes'))
+  // let notes = getNotesObject()
 
 
   //primero obtener elementos
@@ -62,98 +44,121 @@ const start = () => {
   }
 
   const addNotes = () => {
+    const notes = getNotesObject()
     const newNote = newNoteInputElement.value
-    console.log(newNote)
     const id = Math.round(Math.random() * 1000000)
     const newNotes = { ...notes, [id]: newNote }
-    localStorage.setItem('notes', JSON.stringify(newNotes))
-    notes = newNotes
+    setNotesObject(newNotes)
     newNoteInputElement.value = ''
-    displayNotes(getNotes())
-  }
-  // console.log('3') //
-
-  const getNotes = () => Object.keys(notes).reduce((acu, cur) => ([...acu, { id: cur, note: notes[cur] }]), [])
-
-  const renderNote = ({ note, id }) => `<li id='${id}-container' class="note-item">
-  <span id='${id}-note'>${note}</span>
-  <div id='${id}-note-options' class="note-item-options hide">
-    <button id='${id}-copy-note'><i  class="fa fa-clone" aria-hidden="true"></i></button>
-    <button><i id='edit-note' class="fa fa-pencil" aria-hidden="true"></i></button>
-    <button><i id='delete-note' class="fa fa-trash" aria-hidden="true"></i></button>
-  </div>
-</li>`
-
-  const displayNotes = (notes) => {
-    containNotesElement.innerHTML = notes.map((cur) => renderNote(cur)).join('')
+    displayNotes(getNotesArray())
   }
 
+  const renderWrapperNote = ({ noteElement, id }) => `<li id='${id}-container' class="note-item">
+    ${noteElement}
+  </li>`
+
+  const renderNote = ({ note, id }) => `
+    <span id='${id}-note'>${note}</span>
+    <div id='${id}-note-options' class="note-item-options hide">
+      <button id='${id}-copy-note'><i  class="fa fa-clone" aria-hidden="true"></i></button>
+      <button><i id='${id}-edit-note' class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button><i id='${id}-delete-note' class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+  `
+
+  const renderEditNote = ({ note, id }) => `<li id='${id}-container' class="note-item edit">
+    <input id='${id}-note-input' class="note-input" value="${note}"/>
+    <button><i id='${id}-save-note' class="fa fa-check" aria-hidden="true"></i></button>
+  </li>`
+
+  const displayNotes = (notesArray) => {
+    containNotesElement.innerHTML = notesArray.map((cur) => {
+
+      const noteElement = renderWrapperNote({ noteElement: renderNote(cur), id: cur.id })
+
+      return noteElement
+    }).join('')
+  }
+
+  const addEventsOnNotes = (notes) => {
+    Object.keys(notes).forEach(cur => {
+      const noteContainerId = `${cur}-container`
+      const noteOptionsId = `${cur}-note-options`
+      const buttonCopyNoteId = `${cur}-copy-note`
+      const buttonDeleteNoteId = `${cur}-delete-note`
+      const buttonEditNoteId = `${cur}-edit-note`
+
+      const noteItemElement = document.getElementById(noteContainerId)
+      const noteOptionsElement = document.getElementById(noteOptionsId)
+      const buttonCopyNote = document.getElementById(buttonCopyNoteId)
+      const buttonDeleteNote = document.getElementById(buttonDeleteNoteId)
+      const buttonEditNoteElement = document.getElementById(buttonEditNoteId)
+
+      if (!noteItemElement) return console.warn(`element with id "${noteContainerId}" does not exist `)
+      if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
+      if (!buttonCopyNote) return console.warn(`element with id "${buttonCopyNoteId}" does not exist `)
+      if (!buttonDeleteNote) return console.warn(`element with id "${buttonDeleteNoteId}" does not exist `)
+      if (!buttonEditNoteElement) return console.warn(`element with id "${buttonEditNoteId}" does not exist `)
+
+      const onHideNoteOptions = () => noteOptionsElement.classList.add('hide')
+
+      const onShowNoteOptions = () => noteOptionsElement.classList.remove('hide')
+
+      const onCopyNote = (noteValue) => {
+        noteOptionsElement.classList.add('hide')
+        navigator.clipboard.writeText(noteValue)
+      }
+
+      const onDeleteNote = (key) => {
+        const notesCopy = { ...getNotesObject() }
+        delete notesCopy[key]
+        setNotesObject(notesCopy)
+        displayNotes(getNotesArray())
+        addEventsOnNotes(getNotesObject())
+      }
+
+      const addUpdate = ({ id }) => {
+        const noteInputId = `${id}-note-input`
+        const noteInputElement = document.getElementById(noteInputId)
+        if (!noteInputElement) return console.warn('cant find input note element')
+
+        const notes = getNotesObject()
+        const newNotes = { ...notes, [id]: noteInputElement.value }
+        setNotesObject(newNotes)
+        displayNotes(getNotesArray())
+        addEventsOnNotes(getNotesObject())
+      }
+
+      const onShowEditNote = ({ id, note }) => {
+        noteItemElement.innerHTML = renderEditNote({ note, id })
+
+        const saveNoteId = `${id}-save-note`
+        const saveNoteElement = document.getElementById(saveNoteId)
+        if (!saveNoteElement) return console.warn('cant find save note id')
+
+        saveNoteElement.addEventListener('click', () => addUpdate({ id }))
+      }
+
+      noteItemElement.addEventListener('mouseenter', onShowNoteOptions)
+      noteItemElement.addEventListener('mouseleave', onHideNoteOptions)
+      buttonCopyNote.addEventListener('click', () => onCopyNote(notes[cur]))
+      buttonDeleteNote.addEventListener('click', () => onDeleteNote(cur))
+      buttonEditNoteElement.addEventListener('click', () => onShowEditNote({ id: cur, note: notes[cur] }))
+    })
+  }
 
 
   console.log('4') //
   //SEARCHER
   const searchingNote = () => {
-    // const noteId=`${id}-note`
-    const searchInputValueElement = searchInputElement.value
-    const savedNoteElement = JSON.parse(localStorage.getItem('notes'))
-    console.log('5') //
-    if (!searchInputValueElement) return console.warn('element with id ("search-input").value does not exist ')
-    if (!savedNoteElement) return console.warn('element with id "noteId" does not exist ')
+    const searchInputValue = searchInputElement.value
+    if (!searchInputValue) return displayNotes(getNotesArray())
 
-    const onFilteredNotes = Object.keys(savedNoteElement).filter((key) => {
-      const note = savedNoteElement[key]
-      return note.includes(searchInputValueElement)
-    })
-    if (onFilteredNotes.length > 0) {
-      renderNotes(onFilteredNotes, savedNoteElement)
-    } else {
-      console.info('No notes found with the given search term')
-    }
-  }
-  console.log('6') //
-  const renderNotes = (filteredNotes, savedNoteElement) => {
-    // const containNotesElement = document.getElementById('${id}-container')
-    containNotesElement.innerHTML = filteredNotes.map((key) => {
-      // Renderizar cada nota encontrada
-      return `<li id='${key}-container' class="note-item">
-      <span id='${key}-note'>${savedNoteElement[key]}</span>
-      <div id='${key}-note-options' class="note-item-options hide">
-        <button id='${key}-copy-note'><i class="fa fa-clone" aria-hidden="true"></i></button>
-        <button><i id='edit-note' class="fa fa-pencil" aria-hidden="true"></i></button>
-        <button><i id='delete-note' class="fa fa-trash" aria-hidden="true"></i></button>
-      </div>
-    </li>`
-    }).join('')
+    const notesFiltered = getNotesArray().filter(note => note.note.includes(searchInputValue))
+    displayNotes(notesFiltered)
   }
 
 
-
-
-  //
-
-
-  console.log('edit') //
-
-  //DELETE
-  const onDeleteNote = (key, notes) => {
-    const noteContainerId = `${key}-container`
-    const noteOptionsId = `${key}-note-options`
-    const deleteNoteId = 'delete-note'
-    console.log('estoy dentro del delete')
-    const noteItemElement = document.getElementById(noteContainerId)
-    const noteOptionsElement = document.getElementById(noteOptionsId)
-    const buttonDeleteNote = document.getElementById(deleteNoteId)
-
-    if (!noteItemElement) return console.warn(`element with id "${noteContainerId}" does not exist `)
-    if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
-    if (!buttonDeleteNote) return console.warn(`element with id "${deleteNoteId}" does not exist `)
-
-    buttonDeleteNote.addEventListener('click', console.log('estoy aqui'))
-
-  }
-
-
-  console.log('eventos')
   //eventos
   searchButtonElement.addEventListener('click', searchingNote)
   addNoteElement.addEventListener('click', onToggleNotesOptionsVisibility)
@@ -162,92 +167,38 @@ const start = () => {
   // buttonDeleteNoteElement.addEventListener('click',)
 
 
-  console.log('initial function')
-  //initial function
-  console.log({ notes })
-  console.log({ notesIds: Object.keys(notes) })
-
-  displayNotes(getNotes())
-
-  Object.keys(notes).forEach(cur => {
-    const noteContainerId = `${cur}-container`
-    const noteOptionsId = `${cur}-note-options`
-
-    const noteItemElement = document.getElementById(noteContainerId)
-    const noteOptionsElement = document.getElementById(noteOptionsId)
-
-    if (!noteItemElement) return console.warn(`element with id "${noteContainerId}" does not exist `)
-    if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
-
-    const onHideNoteOptions = () => {
-      noteOptionsElement.classList.add('hide')
-      console.log("hiden")
-    }
-    const onShowNoteOptions = () => noteOptionsElement.classList.remove('hide')
-
-    noteItemElement.addEventListener('mouseenter', onShowNoteOptions)
-    noteItemElement.addEventListener('mouseleave', onHideNoteOptions)
-  })
+  displayNotes(getNotesArray())
+  addEventsOnNotes(getNotesObject())
 
 
-  // EDIT
-  // renderNote()
-  const onEditNote = (key, notes) => {
-    const noteContainerId = `${key}-container`
-    const noteOptionsId = `${key}-note-options`
-    const editNoteId = 'edit-note'
-    console.log('estoy dentro del edit')
-    const noteItemElement = document.getElementById(noteContainerId)
-    const noteOptionsElement = document.getElementById(noteOptionsId)
-    const buttonEditNote = document.getElementById(editNoteId)
+  // // EDIT
+  // // renderNote()
+  // const onEditNote = (key, notes) => {
+  //   const noteContainerId = `${key}-container`
+  //   const noteOptionsId = `${key}-note-options`
+  //   const editNoteId = 'edit-note'
+  //   console.log('estoy dentro del edit')
+  //   const noteItemElement = document.getElementById(noteContainerId)
+  //   const noteOptionsElement = document.getElementById(noteOptionsId)
+  //   const buttonEditNote = document.getElementById(editNoteId)
 
-    if (!noteItemElement) return console.warn(`element with id "${noteContainerId}" does not exist `)
-    if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
-    if (!buttonEditNote) return console.warn(`element with id "${editNoteId}" does not exist `)
-
-    const aqui = () => {
-      console.log('estoy aqui')
-    }
-
-    buttonEditNote.addEventListener('click', aqui())
-
-  }
-  // const editNote()=>containNotesElement.innerHTML=
-
-  console.log('delete')
-
-  //COPY
-  Object.keys(notes).forEach(key => {
-    const noteId = `${key}-note`
-    const buttonCopyNoteId = `${key}-copy-note`
-    const noteOptionsId = `${key}-note-options`
-
-    const noteElement = document.getElementById(noteId)
-    const buttonCopyNote = document.getElementById(buttonCopyNoteId)
-    const noteOptionsElement = document.getElementById(noteOptionsId)
-
-    if (!noteElement) return console.warn(`element with id "${noteId}" does not exist `)
-    if (!buttonCopyNote) return console.warn(`element with id "${buttonCopyNoteId}" does not exist `)
-    if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
-
-    const onCopyNote = (noteValue) => {
-      navigator.clipboard.writeText(noteValue)
-      const onHideNoteOptions = () => {
-        noteOptionsElement.classList.add('hide')
-        console.log("hiden")
-      }
-
-      buttonCopyNote.addEventListener('click', onHideNoteOptions)
-    }
-
-    buttonCopyNote.addEventListener('click', () => onCopyNote(notes[key]))
-    
-  })
+  //   if (!noteItemElement) return console.warn(`element with id "${noteContainerId}" does not exist `)
+  //   if (!noteOptionsElement) return console.warn(`element with id "${noteOptionsId}" does not exist `)
+  //   if (!buttonEditNote) return console.warn(`element with id "${editNoteId}" does not exist `)
 
 
+  //   buttonEditNote.addEventListener('click', aqui())
+  // }
 }
-console.log('find')
 
 start()
 
-console.log('find find')
+// TODO:
+// - read all code and understand
+// - hide form after add a note
+// - add cancel button (x) before input when edit a node
+// - add enter event on search
+// - search on every key pressed
+// - show a message confirmation (alert) before to delete a note
+// - add mouse: pointer in all clickable elements
+// - add footer, with creator and year

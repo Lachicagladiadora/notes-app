@@ -212,6 +212,16 @@ body{
   
 }
 
+.edit{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.note-input{
+  width: 100%;
+}
+
 .note-item:hover{
   background-color: var(--silver);
   font-size: 112%;
