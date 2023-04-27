@@ -34,7 +34,9 @@ body{
 /* TITLE */
 header{
   background-color: var(--black);
+  padding-top: 10px;
   width: 95%;
+  margin: auto;
 }
 
 .title-1{
@@ -44,7 +46,6 @@ header{
 
 header h1 i{
   color: var(--yellow);
-  font-size: 4rem;
 }
 
 h1 {
@@ -275,18 +276,35 @@ h1 {
 footer{
   background-color: var(--black);
   color: var(--gunmetal);
+  font-family: var(--type-font);
   text-align: center;
-  padding: 1rem ;
+  padding: 3rem ;
+}
+footer a{
+  font-size: 2rem;
+  position: absolute;
+}
+footer a i{
+  color: #debe49;
+  padding: 10px;
+  position: relative;
+  bottom: 3rem;
+  
+  /* size: 2rem; */
+}
+footer p{
+  padding: 5px;
+  position: relative;
+  bottom: 1px;
+
 }
 
 /* OTHERS GENERAL */
 /* SCROLL  */
 body::-webkit-scrollbar{
   background-color: var(--silver);
-  /* color:#b91010; */
   width: 8px;
   height: auto;
-  /* display: none; */
 }
 body::-webkit-scrollbar-track{
   color: blue;
