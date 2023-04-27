@@ -129,6 +129,7 @@ const start = () => {
 // delete note
       const onDeleteNote = (key) => {
         const notesCopy = { ...getNotesObject() }
+        alert ('Do you want to delete this note?')
         delete notesCopy[key]
         setNotesObject(notesCopy)
         displayNotes(getNotesArray())
@@ -186,7 +187,19 @@ const start = () => {
 
   }
 // EVENTS OUTSIDE THE NOTES
-  const eventOfKey = (event) => {
+  
+  const addNotesOfKey = (event) => {
+    // if ()
+    if (event.key === "Enter") {
+      event.preventDefault()
+      newNoteButtonElement.click()
+      cancelNewNoteElement.click()
+    }
+    onHideAddNoteElement
+    addNotes
+  }
+
+  const searchOfKey = (event) => {
     // if ()
     if (event.key === "Enter") {
       event.preventDefault()
@@ -199,8 +212,11 @@ const start = () => {
   addNoteElement.addEventListener('click', onToggleNotesOptionsVisibility)
   newNoteButtonElement.addEventListener('click', addNotes)
 
-  searchInputElement.addEventListener("keypress",eventOfKey)
+  searchInputElement.addEventListener("keypress",searchOfKey)
   searchInputElement.addEventListener("keyup",searchingNote)
+  newNoteInputElement.addEventListener("key",onHideAddNoteElement)
+  newNoteInputElement.addEventListener("keyup",addNotesOfKey)
+  
   
   displayNotes(getNotesArray())
   addEventsOnNotes(getNotesObject())
