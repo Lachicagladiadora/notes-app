@@ -224,13 +224,3 @@ const start = () => {
 }
 
 start()
-
-// TODO:
-// - read all code and understand, after that propose how to improve code
-// - hide form after add a note
-// - add cancel button (x) before input when edit a node
-// - add enter event on search
-// - search on every key pressed
-// - show a message confirmation (alert) before to delete a note
-// - add mouse: pointer in all clickable elements
-// - add footer, with creator and yearconst keyBoard = Event.key

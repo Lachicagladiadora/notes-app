@@ -1,106 +1,9 @@
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
 
 *{
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
-  /* overflow-x: hidden; */
+  
 }
 
 :root{
@@ -112,6 +15,7 @@ button:focus-visible {
   --yellow:#debe49; /*amarillo*/
   --type-font: monospace;
 }
+
 body{
   background-color: var(--grey);
   font-family: var(--type-font);
@@ -119,29 +23,56 @@ body{
   position: relative;
   width: 100vw;
   min-height: 100vh;
-  /* border: solid 2px royalblue; */
-  
+  overflow-x: hidden;
 }
 
 .contain{
-  /* border: solid 2px royalblue; */
   max-width: 900px;
   margin: auto;
 }
+
 /* TITLE */
-.title-1{
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+header{
+  background-color: var(--black);
+  width: 95%;
 }
 
+.title-1{
+  text-align: center;
+  margin-top: 2px;
+}
+
+header h1 i{
+  color: var(--yellow);
+  font-size: 4rem;
+}
+
+h1 {
+  overflow: hidden; 
+  border-right: .18em solid #424242;
+  white-space: nowrap; 
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: .15em; 
+  animation:
+    typing 3.5s steps(40, end), 
+    blink-caret .75s step-end infinite; 
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  50% { border-color:var(red) }
+}
 
 /* SEARCHER */
 .search{
   text-align: center;
   display: flex;
   width: 100%;
-  /* border: solid 2px rgb(112, 200, 112); */
   padding-bottom: 2rem;
   position: relative;
 }
@@ -226,6 +157,7 @@ body{
   background-color: var(--silver);
   font-size: 112%;
   color: var(--yellow);
+  cursor: pointer;
 }
 
 /* NOTE ITEM OPTIONS */
@@ -253,16 +185,10 @@ body{
 }
 
 .note-item-options button:hover{
-  /* font-size: 120%; */
-  /* border: solid 2px red; */
   color: var(--white);
+  cursor: pointer;
 }
-/* .note-item-options button fa fa-pencil:hover{
-  font-size: 120%;
-}
-.note-item-options button fa fa-trash:hover{
-  font-size: 120%;
-} */
+
 
 /* CONTAIN BUTTONS FOR ADD */
 .contain-buttons{
@@ -288,6 +214,7 @@ body{
   background-color: var(--grey);
   color: var(--yellow);
   border: solid 1px #debe49;
+  cursor: pointer;
 }
 
 /* NEW NOTE */
@@ -296,7 +223,8 @@ body{
   border-radius: 15px;
   background-color: var(--silver);
   text-align: center;
-  padding: 25px;
+  padding-top: 25px;
+  min-width: 200px;
   position: fixed;
   top: 55vh;
   bottom: 10vh;
@@ -304,7 +232,6 @@ body{
   width: 83%;
   z-index: 1;
   background-position: bottom;
-  
 }
 
 .new-note-input{
@@ -312,7 +239,8 @@ body{
   background-color: var(--black);
   color: var(--white);
   height: 4rem;
-  max-width: 90%;
+  width: 85%;
+  min-width: 100px;
   padding-left: 25px;
   border-radius: 0.7rem;
   font-weight: bold;
@@ -326,7 +254,8 @@ body{
   font-weight: bold;
 }
 
-.new-note-button{
+.new-note-button,
+.cancel-new-note{
   border: none;
   border-radius: 1rem;
   background-color: var(--yellow);
@@ -335,20 +264,40 @@ body{
   width: 2rem;
   margin-left: 5px;
 }
-.new-note-button:hover{
+.new-note-button:hover,
+.cancel-new-note:hover{
   background-color: var(--black);
   color: var(--white);
   border: solid 3px #debe49;
+  cursor: pointer;
 }
   
+footer{
+  background-color: var(--black);
+  color: var(--gunmetal);
+  text-align: center;
+  padding: 1rem ;
+}
 
 /* OTHERS GENERAL */
-
 /* SCROLL  */
-body {
-  scrollbar-width: none;
+body::-webkit-scrollbar{
+  background-color: var(--silver);
+  /* color:#b91010; */
+  width: 8px;
+  height: auto;
+  /* display: none; */
 }
-::-webkit-scrollbar {
-  display: none;
+body::-webkit-scrollbar-track{
+  color: blue;
+  background-color: var(--silver);
 }
-
+body::-webkit-scrollbar-thumb:hover {
+  display: initial;
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+body::-webkit-scrollbar-thumb{
+  background: var(--gunmetal);
+  border-radius: 4px;
+}
