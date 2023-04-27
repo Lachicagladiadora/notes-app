@@ -15,15 +15,20 @@
   <div id="contain" class="contain">
     <!-- <div id="app"></div> -->
 
-    <h1 class="title-1">my notes</h1>
+    <header>
+      <h1 class="title-1">
+        <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+        my notes
+      </h1>
+    </header>
 
 <!-- NEW NOTE -->
     <div id="new-note" class="new-note hide">
-      <input id="new-note-input" type="text" class="new-note-input" placeholder="write your note">
+      <input id="new-note-input" type="text" class="new-note-input" placeholder="write your note" onclick="">
       <button id="new-note-button" class="new-note-button">
         <i class="fa fa-check" aria-hidden="true"></i>
       </button>
-      <button  id='cancel-new-note' class="calcel-new-note">
+      <button  id='cancel-new-note' class="cancel-new-note">
         <i class="fa fa-times" aria-hidden="true"></i>
       </button>
     </div>
@@ -35,32 +40,39 @@
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
     </div>
-    <!-- NOTES LIST -->
+
+<!-- NOTES LIST -->
     <div>
-      <ul id="contain-notes" class="contain-notes">
-        <!-- <li id="noteItem" class="note-item"></li> -->
-      </ul>
+      <ul id="contain-notes" class="contain-notes"></ul>
     </div>
-    <!-- EDIT NOTE -->
 
-    <!-- <div id="notesWritten" class="note-write"></div> -->
+<!-- EDIT NOTE -->
 
-
-    
 
   </div>
 
   <!-- CONTAIN BUTTONS -->
   <div id="containButtons" class="contain-buttons">
-    <!-- BUTTON OF FAVORITES -->
-    <!-- <button id="favorites-note" class="favorites-note"> -->
-      <!-- <i class="fa fa-star" aria-hidden="true"></i> -->
-    <!-- </button> -->
+
     <!-- BUTTON FOR ADD NOTE -->
     <button id="add-note" class="add-note">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
+
+        <!-- BUTTON OF FAVORITES -->
+    <!-- <button id="favorites-note" class="favorites-note"> -->
+      <!-- <i class="fa fa-star" aria-hidden="true"></i> -->
+    <!-- </button> -->
   </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="https://github.com/Lachicagladiadora">
+      <i class="fa fa-github" aria-hidden="true"></i>
+    </a>
+     2023 - by Lachicagladiadora
+  </footer>
+
   
   <script type="module" src="/main.js"></script>
 </body>
