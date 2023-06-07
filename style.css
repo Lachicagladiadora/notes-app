@@ -50,7 +50,7 @@ header h1 i{
 
 h1 {
   overflow: hidden; 
-  border-right: .18em solid #424242;
+  border-right: .18em solid var(--black);
   white-space: nowrap; 
   font-size: 4rem;
   font-weight: bold;
@@ -105,6 +105,7 @@ h1 {
 /* BUTTON OF SEARCHER */
 .search-button{
   background-color: var(--yellow);
+  border-style: none;
   height: 30px;
   width: 30px;
   border-radius: 15px;
@@ -145,13 +146,67 @@ h1 {
 }
 
 .edit{
+  margin: 0;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--yellow);
 }
 
-.note-input{
+/* li.note-item-edit{
+  background: red;
+  color: blue;
+} */
+
+.note-input-edit{
   width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  border: hidden;
+  background-color: var(--yellow);
+  margin-right: -85px;
+}
+
+.check{
+  border-style: none;
+  border-radius: 50%;
+}
+
+.fa.fa-check{
+  padding: 5px;
+  color: var(--black);
+  border: solid 1px var(--black);
+  background-color: var(--yellow);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.fa.fa-check:hover{
+  background-color: var(--black);
+  color: var(--yellow);
+}
+
+.cancel-times{
+  border-style: none;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.fa.fa-times{
+  padding: 5px;
+  color: var(--black);
+  border: solid 1px var(--black);
+  background-color: var(--yellow);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.fa.fa-times:hover{
+  background-color: var(--black);
+  color: var(--yellow);
 }
 
 .note-item:hover{
@@ -214,13 +269,13 @@ h1 {
 .add-note:hover{
   background-color: var(--grey);
   color: var(--yellow);
-  border: solid 1px #debe49;
+  border: solid 1px var(--yellow);
   cursor: pointer;
 }
 
 /* NEW NOTE */
 .new-note{
-  border: solid 3px #debe49;
+  border: solid 3px var(--yellow);
   border-radius: 15px;
   background-color: var(--silver);
   text-align: center;
@@ -296,14 +351,14 @@ footer p{
   padding: 5px;
   position: relative;
   bottom: 1px;
-
+  box-sizing: border-box;
 }
 
 /* OTHERS GENERAL */
 /* SCROLL  */
 body::-webkit-scrollbar{
   background-color: var(--silver);
-  width: 8px;
+  width: 5px;
   height: auto;
 }
 body::-webkit-scrollbar-track{

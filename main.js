@@ -79,9 +79,9 @@ const start = () => {
   `
 
   const renderEditNote = ({ note, id }) => `<li id='${id}-edit' class="note-item edit">
-    <input id='${id}-note-input' class="note-input" value="${note}"/>
-    <button><i id='${id}-save-note' class="fa fa-check" aria-hidden="true"></i></button>
-    <button><i id='${id}-cancel-edit-note' class="fa fa-times" aria-hidden="true"></i></i></button>
+    <input id='${id}-note-input-edit' class="note-input-edit" value="${note}"/>
+    <button class="check"><i id='${id}-save-note' class="fa fa-check" aria-hidden="true"></i></button>
+    <button class="cancel-times"><i id='${id}-cancel-edit-note' class="fa fa-times" aria-hidden="true"></i></button>
   </li>`
   
 // write the notes in html to display them on the screen
