@@ -85,7 +85,7 @@ h1 {
   padding-right: 40px;
   padding-left: 20px;
   box-sizing: border-box;
-  background-color: var(--grey);
+  background-color: var(--black);
   border: solid 2px #debe49;
   border-radius: 10px;
   height: 2rem;
@@ -96,7 +96,7 @@ h1 {
   
 }
 .search-input:hover{
-  background-color: var(--silver);
+  background-color: var(--grey);
   border: solid 2.5px #debe49;
   color: var(--white);
   font-weight: bold;
@@ -104,16 +104,16 @@ h1 {
 
 /* BUTTON OF SEARCHER */
 .search-button{
-  background-color: var(--yellow);
+  background-color: var(--black);
   border-style: none;
   height: 30px;
   width: 30px;
   border-radius: 15px;
-  color: var(--grey);
+  color: var(--gunmetal);
   font-size: 18px;
   margin-left: 10px;
   position: absolute;
-  right: 4px;
+  right: 8px;
   top: 6.5px;
 }
 
@@ -154,14 +154,11 @@ h1 {
   background-color: var(--yellow);
 }
 
-/* li.note-item-edit{
-  background: red;
-  color: blue;
-} */
 
 .note-input-edit{
   width: 100%;
   padding: 1rem 1.5rem;
+  padding-right: 6.5em;
   border-radius: 10px;
   border: hidden;
   background-color: var(--yellow);
@@ -214,6 +211,7 @@ h1 {
   font-size: 112%;
   color: var(--yellow);
   cursor: pointer;
+  margin-top: 2em;
 }
 
 /* NOTE ITEM OPTIONS */
@@ -223,26 +221,28 @@ h1 {
 }
 
 .note-item-options{
-  background-color: var(--grey);
+  background-color: var(--black);
   padding: 4px;
   border-radius: 8px;
   position: absolute;
   right: 0px;
-  top: -10px;
+  top: -18px;
 }
 
 .note-item-options button{
   border: none;
-  background-color: var(--grey);
-  color: var(--yellow);
+  background-color: var(--black);
+  color: var(--white);
   border-radius: 6px;
   border-color: var(--black);
   font-size: 20px;
 }
 
 .note-item-options button:hover{
-  color: var(--white);
+  color: var(--yellow);
   cursor: pointer;
+  background-color: var(--black);
+  padding: .2em;
 }
 
 
@@ -373,4 +373,40 @@ body::-webkit-scrollbar-thumb:hover {
 body::-webkit-scrollbar-thumb{
   background: var(--gunmetal);
   border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+  .contain{
+    padding: 0 3.5em 0 3.5em;
+    background: rebeccapurple;
+  }
+  .title-1{
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 481px) {
+  .contain{
+    padding: 0 4em 0 4em;
+  }
+  .title-1{
+    font-size: 2.8rem;
+  }
+}
+
+@media (min-width: 761px) {
+  .contain{
+    padding: 0 4.5em 0 4.5em;
+  }
+  .title-1{
+    font-size: 3.5rem;
+  }
+}
+@media (min-width: 1081px) {
+  .contain{
+    padding: 0 5em 0 5em;
+  }
+  .title-1{
+    font-size: 4rem;
+  }
 }
