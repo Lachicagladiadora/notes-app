@@ -1,0 +1,400 @@
+:root{
+  --white:#E6E6E6; /*0.25*/
+  --gunmetal:#848484; /*0.5*/
+  --silver:#424242; /*0.75*/
+  --grey:#1C1C1C; /*0.87*/
+  --black:#141414; /*0.90*/
+  --yellow:#debe49; /*amarillo*/
+  --type-font: monospace;
+}
+
+body{
+  background-color: var(--grey);
+  font-family: var(--type-font);
+  color: var(--white);
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* TITLE */
+header{
+  background-color: var(--black);
+  padding-top: 10px;
+  width: 95%;
+  margin: auto;
+}
+
+.title-1{
+  text-align: center;
+  margin-top: 2px;
+}
+
+header h1 i{
+  color: var(--yellow);
+}
+
+/* h1 {
+  overflow: hidden; 
+  border-right: .18em solid var(--white);
+  transform: var(--grey);
+  white-space: nowrap; 
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: .15em; 
+  animation:
+    typing 3.5s steps(40, end), 
+    blink-caret .75s step-end infinite; 
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  50% { border-color:var(rgb(36, 36, 36)) }
+} */
+
+/* SEARCHER */
+/* .search{ */
+  /* text-align: center; */
+  /* display: flex; */
+  /* width: 100%; */
+  /* padding-bottom: 2rem; */
+  /* position: relative; */
+/* } */
+/*  */
+/* .search-input{ */
+  /* border-style: none; */
+  /* padding-top: 20px; */
+  /* padding-bottom: 20px; */
+  /* padding-right: 40px; */
+  /* padding-left: 20px; */
+  /* box-sizing: border-box; */
+  /* background-color: var(--black); */
+  /* border: solid 2px #debe49; */
+  /* border-radius: 10px; */
+  /* height: 2rem; */
+  /* width: 100%; */
+  /* color: var(--white); */
+  /* font-weight: bold; */
+  /* font-size: 1rem; */
+  /*  */
+/* } */
+/* .search-input:hover{ */
+  /* background-color: var(--grey); */
+  /* border: solid 2.5px #debe49; */
+  /* color: var(--white); */
+  /* font-weight: bold; */
+/* } */
+
+/* BUTTON OF SEARCHER */
+/* .search-button{ */
+  /* background-color: var(--black); */
+  /* border-style: none; */
+  /* height: 30px; */
+  /* width: 30px; */
+  /* border-radius: 15px; */
+  /* color: var(--gunmetal); */
+  /* font-size: 18px; */
+  /* margin-left: 10px; */
+  /* position: absolute; */
+  /* right: 8px; */
+  /* top: 6.5px; */
+/* } */
+/*  */
+/* .search-button:hover, */
+/* .search-button #img:hover{ */
+  /* background-color: var(--silver); */
+  /* color: var(--yellow); */
+  /* cursor: pointer; */
+  /* border-color: #424242; */
+/*  */
+/* } */
+
+/* CONTAIN NOTES LIST (ul) */
+/* .contain-notes{
+  list-style: none;
+  padding: 0px;
+  
+} */
+
+/* NOTES LIST */
+/* .note-item{ */
+  /* background-color: var(--black); */
+  /* padding: 1rem 1.5rem; */
+  /* margin: 1rem auto; */
+  /* position: relative; */
+  /* border-radius: 12px; */
+  /* text-align: center; */
+  /*  */
+  /*  */
+/* } */
+/*  */
+/* .edit{ */
+  /* margin: 0; */
+  /* padding: 0; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  /* background-color: var(--yellow); */
+/* } */
+/*  */
+/*  */
+/* .note-input-edit{ */
+  /* width: 100%; */
+  /* padding: 1rem 1.5rem; */
+  /* padding-right: 6.5em; */
+  /* border-radius: 10px; */
+  /* border: hidden; */
+  /* background-color: var(--yellow); */
+  /* margin-right: -85px; */
+/* } */
+/*  */
+/* .check{ */
+  /* border-style: none; */
+  /* border-radius: 50%; */
+/* } */
+/*  */
+/* .fa.fa-check{ */
+  /* padding: 5px; */
+  /* color: var(--black); */
+  /* border: solid 1px var(--black); */
+  /* background-color: var(--yellow); */
+  /* width: 100%; */
+  /* height: 100%; */
+  /* border-radius: 50%; */
+/* } */
+/*  */
+/* .fa.fa-check:hover{ */
+  /* background-color: var(--black); */
+  /* color: var(--yellow); */
+/* } */
+/*  */
+/* .cancel-times{ */
+  /* border-style: none; */
+  /* border-radius: 50%; */
+  /* margin-right: 10px; */
+/* } */
+/*  */
+/* .fa.fa-times{ */
+  /* padding: 5px; */
+  /* color: var(--black); */
+  /* border: solid 1px var(--black); */
+  /* background-color: var(--yellow); */
+  /* width: 100%; */
+  /* height: 100%; */
+  /* border-radius: 50%; */
+/* } */
+/*  */
+/* .fa.fa-times:hover{ */
+  /* background-color: var(--black); */
+  /* color: var(--yellow); */
+/* } */
+/*  */
+/* .note-item:hover{ */
+  /* background-color: var(--silver); */
+  /* font-size: 112%; */
+  /* color: var(--yellow); */
+  /* cursor: pointer; */
+  /* margin-top: 2em; */
+/* } */
+
+/* NOTE ITEM OPTIONS */
+/* .hide{ */
+  /* display: none; */
+  /*  */
+/* } */
+/*  */
+.note-options{ 
+  background-color: var(--black);
+  padding: 4px;
+  border-radius: 8px;
+  position: absolute;
+  right: 0px;
+  top: -18px;
+}
+
+/* .note-item-options button{ */
+  /* border: none; */
+  /* background-color: var(--black); */
+  /* color: var(--white); */
+  /* border-radius: 6px; */
+  /* border-color: var(--black); */
+  /* font-size: 20px; */
+/* } */
+/*  */
+/* .note-item-options button:hover{ */
+  /* color: var(--yellow); */
+  /* cursor: pointer; */
+  /* background-color: var(--black); */
+  /* padding: .2em; */
+/* } */
+
+
+/* CONTAIN BUTTONS FOR ADD */
+/* .contain-buttons{ */
+  /* position: fixed; */
+  /* bottom: 20px; */
+  /* right: 20px; */
+/* } */
+
+/* BUTTON FOR ADD*/
+/* .add-note{ */
+  /* background-color: var(--yellow); */
+  /* color: var(--grey); */
+  /* font-size: 30px; */
+  /* padding: 10px; */
+  /* height: 50px; */
+  /* width: 50px; */
+  /* border: none; */
+  /* border-radius: 25px; */
+  /* text-align: center; */
+/* } */
+/*  */
+/* .add-note:hover{ */
+  /* background-color: var(--grey); */
+  /* color: var(--yellow); */
+  /* border: solid 1px var(--yellow); */
+  /* cursor: pointer; */
+/* } */
+
+/* NEW NOTE */
+/* .new-note{ */
+  /* border: solid 3px var(--yellow); */
+  /* border-radius: 15px; */
+  /* background-color: var(--silver); */
+  /* text-align: center; */
+  /* padding-top: 25px; */
+  /* min-width: 200px; */
+  /* position: fixed; */
+  /* top: 55vh; */
+  /* bottom: 10vh; */
+  /* right: 11vh; */
+  /* width: 83%; */
+  /* z-index: 1; */
+  /* background-position: bottom; */
+/* } */
+/*  */
+/* .new-note-input{ */
+  /* border: none; */
+  /* background-color: var(--black); */
+  /* color: var(--white); */
+  /* height: 4rem; */
+  /* width: 85%; */
+  /* min-width: 100px; */
+  /* padding-left: 25px; */
+  /* border-radius: 0.7rem; */
+  /* font-weight: bold; */
+  /* font-size: 1rem; */
+  /* word-wrap: break-word; */
+  /* white-space:pre-wrap; */
+/* } */
+/* .new-note-input:hover{ */
+  /* background-color: var(--yellow); */
+  /* color: var(--grey); */
+  /* font-weight: bold; */
+/* } */
+/*  */
+/* .new-note-button, */
+/* .cancel-new-note{ */
+  /* border: none; */
+  /* border-radius: 1rem; */
+  /* background-color: var(--yellow); */
+  /* color: var(--grey); */
+  /* height: 2rem; */
+  /* width: 2rem; */
+  /* margin-left: 5px; */
+/* } */
+/* .new-note-button:hover, */
+/* .cancel-new-note:hover{ */
+  /* background-color: var(--black); */
+  /* color: var(--white); */
+  /* border: solid 3px #debe49; */
+  /* cursor: pointer; */
+/* } */
+  /*  */
+/* footer{ */
+  /* background-color: var(--black); */
+  /* color: var(--gunmetal); */
+  /* font-family: var(--type-font); */
+  /* text-align: center; */
+  /* padding: 3rem ; */
+/* } */
+/* footer a{ */
+  /* font-size: 2rem; */
+  /* position: absolute; */
+/* } */
+/* footer a i{ */
+  /* color: #debe49; */
+  /* padding: 10px; */
+  /* position: relative; */
+  /* bottom: 3rem; */
+  /*  */
+  /* size: 2rem; */
+/* } */
+/* footer p{ */
+  /* padding: 5px; */
+  /* position: relative; */
+  /* bottom: 1px; */
+  /* box-sizing: border-box; */
+/* } */
+
+/* OTHERS GENERAL */
+/* SCROLL  */
+body::-webkit-scrollbar{
+  background-color: var(--silver);
+  width: 5px;
+  height: auto;
+}
+body::-webkit-scrollbar-track{
+  color: blue;
+  background-color: var(--silver);
+}
+body::-webkit-scrollbar-thumb:hover {
+  display: initial;
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+body::-webkit-scrollbar-thumb{
+  background: var(--gunmetal);
+  border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+  .contain{
+    padding: 0 3.5em 0 3.5em;
+    background: rebeccapurple;
+  }
+  .title-1{
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 481px) {
+  .contain{
+    padding: 0 4em 0 4em;
+  }
+  .title-1{
+    font-size: 2.8rem;
+  }
+}
+
+@media (min-width: 761px) {
+  .contain{
+    padding: 0 4.5em 0 4.5em;
+  }
+  .title-1{
+    font-size: 3.5rem;
+  }
+}
+@media (min-width: 1081px) {
+  .contain{
+    padding: 0 5em 0 5em;
+  }
+  .title-1{
+    font-size: 4rem;
+  }
+}

@@ -1,0 +1,65 @@
+*{
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  
+}
+
+/* OTHERS GENERAL */
+/* SCROLL  */
+body::-webkit-scrollbar{
+  background-color: var(--silver);
+  width: 5px;
+  height: auto;
+}
+body::-webkit-scrollbar-track{
+  color: blue;
+  background-color: var(--silver);
+}
+body::-webkit-scrollbar-thumb:hover {
+  display: initial;
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+body::-webkit-scrollbar-thumb{
+  background: var(--gunmetal);
+  border-radius: 4px;
+}
+
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 480px) {
+  .contain{
+    padding: 0 3.5em 0 3.5em;
+    background: rebeccapurple;
+  }
+  .title-1{
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 481px) {
+  .contain{
+    padding: 0 4em 0 4em;
+  }
+  .title-1{
+    font-size: 2.8rem;
+  }
+}
+
+@media (min-width: 761px) {
+  .contain{
+    padding: 0 4.5em 0 4.5em;
+  }
+  .title-1{
+    font-size: 3.5rem;
+  }
+}
+@media (min-width: 1081px) {
+  .contain{
+    padding: 0 5em 0 5em;
+  }
+  .title-1{
+    font-size: 4rem;
+  }
+}

@@ -1,79 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Note App</title>
-</head>
-
-<body>
-  <div id="contain" class="contain">
-    <!-- <div id="app"></div> -->
-
-    <header>
-      <h1 class="title-1">
-        <i class="fa fa-thumb-tack" aria-hidden="true"></i>
-        my notes
-      </h1>
-    </header>
-
-<!-- NEW NOTE -->
-    <div id="new-note" class="new-note hide">
-      <input id="new-note-input" type="text" class="new-note-input" placeholder="write your note" onclick="">
-      <button id="new-note-button" class="new-note-button">
-        <i class="fa fa-check" aria-hidden="true"></i>
-      </button>
-      <button  id='cancel-new-note' class="cancel-new-note">
-        <i class="fa fa-times" aria-hidden="true"></i>
-      </button>
-    </div>
-    
-<!-- SEARCHER -->
-    <div id="search" class="search">
-      <input id="search-input" type="text" class="search-input" placeholder="write note">
-      <button id="search-button" class="search-button">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-    </div>
-
-<!-- NOTES LIST -->
-    <div>
-      <ul id="contain-notes" class="contain-notes"></ul>
-    </div>
-
-<!-- EDIT NOTE -->
-
-  </div>
-
-  <!-- CONTAIN BUTTONS -->
-  <div id="containButtons" class="contain-buttons">
-
-    <!-- BUTTON FOR ADD NOTE -->
-    <button id="add-note" class="add-note">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </button>
-
-        <!-- BUTTON OF FAVORITES -->
-    <!-- <button id="favorites-note" class="favorites-note"> -->
-      <!-- <i class="fa fa-star" aria-hidden="true"></i> -->
-    <!-- </button> -->
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <a href="https://github.com/Lachicagladiadora" target="_blank">
-      <i class="fa fa-github" aria-hidden="true"></i>
-    </a>
-    <p>2023 - by Lachicagladiadora</p>
-  </footer>
-
-  
-  <script type="module" src="/main.js"></script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
 </html>
