@@ -3,7 +3,9 @@ import './App.css'
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Note } from './components/Note'
+import { NoteForm } from './components/NoteForm'
 import { Form } from './components/Form'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type NoteItem = {id:string, content: string}
 const noteList:NoteItem[] = [{
@@ -29,17 +31,22 @@ const renderList = (noteList:NoteItem[]) => {
   }))
 }
 
-const displayAddNoteForm = () => {
-  const [contentCopy, setContentCopy] = useState('content')
-  return(
-    <Form id={''} content={''}  onChange={()=>console.log('hi')}>
-      {<>
-        <Input id={""} placeholder='write your note' value={contentCopy} onChange={(e)=>setContentCopy(e.target.value)}/>
-        <IconButton id={""} title={"save note"} icon={"check"} onClick={()=>{}}/>
-        <IconButton id={""} title={"cancel"} icon={"x"} onClick={()=>{}}/> 
-      </>}
-    </Form>
-  )
+const displayAddNoteForm = ({}:NoteItem[]):void => {
+  // const [contentCopy, setContentCopy] = useState('content')
+  // return(
+  //   <NoteForm id='' content=''onChange={() => (console.log('I am form from add note'))}>
+      
+  //   </NoteForm>
+  // )
+  // return(
+  //   <Form id={''} content={''}  onChange={()=>console.log('hi')}>
+      // {<>
+      //   <Input id={""} placeholder='write your note' value={contentCopy} onChange={(e)=>setContentCopy(e.target.value)}/>
+      //   <IconButton id={""} title={"save note"} icon={"check"} onClick={()=>{}}/>
+      //   <IconButton id={""} title={"cancel"} icon={"x"} onClick={()=>{}}/> 
+      // </>}
+  //   </Form>
+  // )
 }
 
 
@@ -48,18 +55,24 @@ const displayAddNoteForm = () => {
 
 function App() {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
+  const [contentCopy, setContentCopy] = useState('content')
+
   return(
     <>
       <h1
         style={{
           textAlign: 'center',
-          fontSize:'4em',
+          fontSize:'5em',
           marginBottom: '3px',
+          marginTop:'10px',
         }}
       >
-        my notes
+        <FontAwesomeIcon icon={'thumbtack'} style={{color:'#debe49'}}/> my notes
       </h1>
-      {displayAddNoteForm && <Form></Form>}
+      {displayAddNoteForm && <Form id={''} content={''} children={<>
+        <IconButton id={""} title={"save note"} icon={"check"} onClick={() => { } } style={{zoom: '120%', position:'fixed', top:'6.5em', right:'12em', background:'#debe49', color:'black' }}/>
+        <IconButton id={""} title={"cancel"} icon={"x"} onClick={() => { } } style={{zoom:'120%', position:'fixed', top:'6.5em', right:'10em', background:'#debe49', color:'black' }}/>
+      </>} onChange={(e:Event) => setContentCopy(e.target.value) }></Form>}
       <div
         style={{
           maxWidth: '800px',
@@ -87,7 +100,6 @@ function App() {
 
         {renderList(noteList)}
 
-        {displayAddNoteForm}
 
         <IconButton
           id='add-note-button'
