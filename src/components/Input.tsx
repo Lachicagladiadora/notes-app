@@ -4,16 +4,18 @@ type InputProps = {
   id: string,
   placeholder?: string,
   value?: string,
+  onChange?: ()=>{}
   style?: CSSProperties,
 }
 
-export const Input = ({id, placeholder, value, style}:InputProps) => {
+export const Input = ({id, placeholder, value, onChange, style}:InputProps) => {
   return(
     <input 
       id={id} 
       type="text" 
       placeholder={placeholder} 
       value={value} 
+      onChange={onChange}
       style={{
         borderRadius: '35px', 
         borderStyle: 'none', 

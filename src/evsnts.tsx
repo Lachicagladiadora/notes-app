@@ -1,14 +1,14 @@
 import { IconButton } from "./components/IconButton"
 import { Input } from "./components/Input"
 
-const addNewNote = ( ) => {
-  return(
-    <Input id={""}    />
-    <IconButton/>
-    <IconButton/>
-  )
-}
-ReactDOM.render(addNewNote(), document.getElementById('root'))
+// const addNewNote = ( ) => {
+//   return(
+//     <Input id={""}    />
+//     <IconButton/>
+//     <IconButton/>
+//   )
+// }
+// ReactDOM.render(addNewNote(), document.getElementById('root'))
 
 
 

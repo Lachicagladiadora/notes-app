@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import './App.css'
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Note } from './components/Note'
+import { Form } from './components/Form'
 
 type NoteItem = {id:string, content: string}
 const noteList:NoteItem[] = [{
@@ -14,23 +16,38 @@ const noteList:NoteItem[] = [{
 ]
 
 const renderList = (noteList:NoteItem[]) => {
-  return (noteList.map((curr)=>{
+  return (noteList.map((cur)=>{
     return(
       <Note 
-        key={curr.id}
-        id={`${curr.id}`}
+        key={cur.id}
+        id={`${cur.id}`}
         onMouseMove={() => console.log('note')}     
       >
-        {curr.content}
+        {cur.content}
       </Note>
     )
   }))
 }
 
+const displayAddNoteForm = () => {
+  const [contentCopy, setContentCopy] = useState('content')
+  return(
+    <Form id={''} content={''}  onChange={()=>console.log('hi')}>
+      {<>
+        <Input id={""} placeholder='write your note' value={contentCopy} onChange={(e)=>setContentCopy(e.target.value)}/>
+        <IconButton id={""} title={"save note"} icon={"check"} onClick={()=>{}}/>
+        <IconButton id={""} title={"cancel"} icon={"x"} onClick={()=>{}}/> 
+      </>}
+    </Form>
+  )
+}
+
+
 
 // const addNote = () => {)vhvhv}
 
 function App() {
+  const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
   return(
     <>
       <h1
@@ -42,7 +59,7 @@ function App() {
       >
         my notes
       </h1>
-      
+      {displayAddNoteForm && <Form></Form>}
       <div
         style={{
           maxWidth: '800px',
@@ -70,11 +87,13 @@ function App() {
 
         {renderList(noteList)}
 
+        {displayAddNoteForm}
+
         <IconButton
           id='add-note-button'
           title='add note'
           icon={'plus'}
-          onClick={()=> console.log("I'm add note")}
+          onClick={()=> setDisplayAddNoteForm((prev) => !prev)}
           style={{
             background:'#debe49',
             color: '#141414',
