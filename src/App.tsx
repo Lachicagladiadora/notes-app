@@ -3,7 +3,32 @@ import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Note } from './components/Note'
 
+type NoteItem = {id:string, content: string}
+const noteList:NoteItem[] = [{
+  id: '01',
+  content: 'sadsfdg',
+}, {
+  id:'02',
+  content:'sdfgfhngmb'
+}
+]
 
+const renderList = (noteList:NoteItem[]) => {
+  return (noteList.map((curr)=>{
+    return(
+      <Note 
+        key={curr.id}
+        id={`${curr.id}`}
+        onMouseMove={() => console.log('note')}     
+      >
+        {curr.content}
+      </Note>
+    )
+  }))
+}
+
+
+// const addNote = () => {)vhvhv}
 
 function App() {
   return(
@@ -43,11 +68,7 @@ function App() {
           }}
         />
 
-        <Note 
-          id={''} 
-          children={"I'm a note"} 
-          onMouseMove={() => console.log('note')}
-        />
+        {renderList(noteList)}
 
         <IconButton
           id='add-note-button'
