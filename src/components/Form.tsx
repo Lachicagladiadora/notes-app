@@ -8,29 +8,26 @@ type FormProps = {
   style?:CSSProperties
 }
 
-export const Form = ({id, content, onChange: onChange, children, style}:FormProps) => {
+export const Form = ({id, content, onChange, children, style}:FormProps) => {
   return(
     <form
       id={id}
       content={content}
       
       style={{
-        margin: '4em 2.5em 2em 4em',
-        background: 'black',
-        border:'solid 2px #debe49',
-        width: '80%',
-        height: '75%',
-        borderRadius: '15px',
-        padding: '2em',
+        background: 'rgba(0, 0, 0, 0.73)',
+        width: '100%',
+        height: '100%',
         display:'flex',
         justifyContent: 'center',
+        alignItems: 'center',
         position:'fixed',
-        bottom: '4rem',
-        right: '4rem',
+        bottom: '0',
+        right: '0',
         ...style
       }}
     >
-      <textarea name="write" id={id}  placeholder='write your note' value={''} onChange={onChange} 
+      {/* <textarea name="write" id={id}  placeholder='write your note' value={''} onChange={onChange} 
         style={{
           borderRadius: '15px', 
           borderStyle: 'none', 
@@ -42,7 +39,7 @@ export const Form = ({id, content, onChange: onChange, children, style}:FormProp
           color:'#e6e6e6',
           fontWeight: 'bold',
           marginBottom: '2em'}}
-      />
+      /> */}
       {children}
     </form>
   )

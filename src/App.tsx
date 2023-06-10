@@ -3,51 +3,47 @@ import './App.css'
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Note } from './components/Note'
-import { NoteForm } from './components/NoteForm'
 import { Form } from './components/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { OptionsButtons } from './components/OptionsButtons'
 
 type NoteItem = {id:string, content: string}
 const noteList:NoteItem[] = [{
   id: '01',
-  content: 'sadsfdg',
+  content: 'First note',
 }, {
   id:'02',
-  content:'sdfgfhngmb'
-}
-]
+  content:'Second note'
+}]
+
+// const displayOptions = ({}:NoteItem[]):void => {
+//  console.log("I'm options")
+// }
 
 const renderList = (noteList:NoteItem[]) => {
+  const [onDisplayOptions, setOnDisplayOptions] = useState(false)
   return (noteList.map((cur)=>{
     return(
-      <Note 
-        key={cur.id}
-        id={`${cur.id}`}
-        onMouseMove={() => console.log('note')}     
-      >
-        {cur.content}
-      </Note>
+      <>
+        <Note
+          key={cur.id}
+          id={`${cur.id}`}
+          onMouseOver={() => setOnDisplayOptions(true)}
+          onMouseOut={() => setOnDisplayOptions(false)}
+          style={{position:'relative'}}
+          >
+          {cur.content}
+          {onDisplayOptions && <OptionsButtons style={{position:'absolute', top:'-1em', right:'0'}}/>}
+        </Note>
+      </>
     )
   }))
 }
 
-const displayAddNoteForm = ({}:NoteItem[]):void => {
-  // const [contentCopy, setContentCopy] = useState('content')
-  // return(
-  //   <NoteForm id='' content=''onChange={() => (console.log('I am form from add note'))}>
-      
-  //   </NoteForm>
-  // )
-  // return(
-  //   <Form id={''} content={''}  onChange={()=>console.log('hi')}>
-      // {<>
-      //   <Input id={""} placeholder='write your note' value={contentCopy} onChange={(e)=>setContentCopy(e.target.value)}/>
-      //   <IconButton id={""} title={"save note"} icon={"check"} onClick={()=>{}}/>
-      //   <IconButton id={""} title={"cancel"} icon={"x"} onClick={()=>{}}/> 
-      // </>}
-  //   </Form>
-  // )
-}
+// const displayAddNoteForm = ({}:NoteItem[]):void => {
+//   // const [contentCopy, setContentCopy] = useState('content')
+  
+// }
 
 
 
@@ -55,37 +51,24 @@ const displayAddNoteForm = ({}:NoteItem[]):void => {
 
 function App() {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
-  const [contentCopy, setContentCopy] = useState('content')
+  const [inputValue, setInputValue] = useState('')
+  // const [contentCopy, setContentCopy] = useState('content')
 
   return(
     <>
-      <h1
-        style={{
-          textAlign: 'center',
-          fontSize:'5em',
-          marginBottom: '3px',
-          marginTop:'10px',
-        }}
-      >
+      <h1 style={{textAlign: 'center',fontSize:'5em',marginBottom: '3px',marginTop:'10px'}}>
         <FontAwesomeIcon icon={'thumbtack'} style={{color:'#debe49'}}/> my notes
       </h1>
-      {displayAddNoteForm && <Form id={''} content={''} children={<>
-        <IconButton id={""} title={"save note"} icon={"check"} onClick={() => { } } style={{zoom: '120%', position:'fixed', top:'6.5em', right:'12em', background:'#debe49', color:'black' }}/>
-        <IconButton id={""} title={"cancel"} icon={"x"} onClick={() => { } } style={{zoom:'120%', position:'fixed', top:'6.5em', right:'10em', background:'#debe49', color:'black' }}/>
-      </>} onChange={(e:Event) => setContentCopy(e.target.value) }></Form>}
-      <div
-        style={{
-          maxWidth: '800px',
-          margin: 'auto'
-        }}
-      >
-        <Input 
-          id='ws' 
-          placeholder='Search'
-          style={{
-            width:'100%',
-          }}
-        />
+
+      {displayAddNoteForm && <Form id={''} content={''} value={inputValue} style={{zIndex:'1'}} children={<>
+          <Input id={''} placeholder='write your note' onChange={(e) => setInputValue((e.target.value))} 
+          style={{maxWidth:'50%', maxHeight:'70%', margin:'1em'}}/>
+          <IconButton title={"save note"} icon={"check"} onClick={() => { } } style={{zoom: '120%',margin:'.5em',  background:'#debe49', color:'black' }}/>
+          <IconButton title={"cancel"} icon={"x"} onClick={() => { } } style={{zoom:'120%',margin:'.5em',  background:'#debe49', color:'black' }}/>
+        </>}></Form>}
+     
+      <div style={{ maxWidth: '800px', margin: 'auto' }} >
+        <Input id='ws' placeholder='Search' value={inputValue} onChange={(e) => setInputValue((e.target.value))} style={{ width:'100%' }}/>
 
         <IconButton 
           id='search-button' 
@@ -97,6 +80,7 @@ function App() {
             color: '#141414'
           }}
         />
+        
 
         {renderList(noteList)}
 

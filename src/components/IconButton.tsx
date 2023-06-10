@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CSSProperties } from "react"
 
 type IconButtonProps = {
-  id: string,
+  id?: string,
   title: string,
   icon: IconProp,
   onClick: () => void,

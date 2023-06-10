@@ -4,7 +4,7 @@ type InputProps = {
   id: string,
   placeholder?: string,
   value?: string,
-  onChange?: ()=>{}
+  onChange: ()=>{}
   style?: CSSProperties,
 }
 
