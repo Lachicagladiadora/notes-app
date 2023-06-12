@@ -1,19 +1,19 @@
-import { CSSProperties, ReactFragment, ReactNode } from "react"
+import { CSSProperties, ReactNode } from "react"
 
 type FormProps = {
   id: string,
   content: string,
-  onChange?: ()=>{},
+  onSubmit?: ()=>{},
   children: ReactNode
   style?:CSSProperties
 }
 
-export const Form = ({id, content, onChange, children, style}:FormProps) => {
+export const Form = ({id, content, onSubmit, children, style}:FormProps) => {
   return(
     <form
       id={id}
       content={content}
-      onSubmit={}
+      onSubmit={onSubmit}
       style={{
         background: 'rgba(0, 0, 0, 0.73)',
         width: '100%',

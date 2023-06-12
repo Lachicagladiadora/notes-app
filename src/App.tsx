@@ -1,12 +1,8 @@
-import { useMemo, useState } from 'react'
+import {  useState } from 'react'
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Note } from './components/Note'
-import { Form } from './components/Form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NoteOptions } from './components/NoteOptions'
 import { Footer } from './components/Footer'
-import { DESIGN_SYSTEM } from './constants'
 import { Header } from './components/Header'
 import { AddNoteForm } from './components/AddNoteForm'
 
@@ -45,9 +41,9 @@ export const App = () => {
   }
   // [{i,c},{I,c},{i,c}]
 
-  // const onDeleteNote = (id: string) => {
-  //   setNotes(prev => prev.filter(cur=>cur.id!==id))
-  // }
+  const onDeleteNote = (id: string) => {
+    setNotes(prev => prev.filter(cur=>cur.id!==id))
+  }
 
   return (
     <>
@@ -71,7 +67,7 @@ export const App = () => {
           {displayAddNoteForm && (<AddNoteForm onSubmit={onAddNote} style={{ marginBottom: "20px" }} />)}
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {notes.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote}>{cur.content}</Note>)}
+            {notes.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>) }
           </div>
 
           <IconButton
