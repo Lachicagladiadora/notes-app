@@ -4,10 +4,11 @@ import { IconButton } from "./IconButton"
 type NoteOptionsProps = {
   onDisplayEdit:()=>void,
   onDisplayDelete: ()=>void,
+  onCopy:()=>void,
   style?: CSSProperties
 }
 
-export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,style }: NoteOptionsProps) => {
+export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,onCopy,style }: NoteOptionsProps) => {
   return (
     <div
       style={{
@@ -18,7 +19,7 @@ export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,style }: NoteOptions
         ...style
       }}
     >
-      <IconButton title="copy" icon={'copy'} size="sm" onClick={() => { console.log('copy') }} style={IconButtonStyles} />
+      <IconButton title="copy" icon={'copy'} size="sm" onClick={onCopy} style={IconButtonStyles} />
       <IconButton title="edit" icon={'pen'} size="sm" onClick={onDisplayEdit} style={IconButtonStyles} />
       <IconButton title="delete" icon={'trash'} size="sm" onClick={onDisplayDelete} style={IconButtonStyles} />
     </div>

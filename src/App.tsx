@@ -45,6 +45,13 @@ export const App = () => {
     setNotes(prev => prev.filter(cur=>cur.id!==id))
   }
 
+  // const onCopyNote = () => {
+    // setNotes(prev => prev.clipboard())
+  //   // setNotes(clipboard.writeText(content.))
+  //   console.log('text')
+  //   // setNoteCopied(false)
+  // }
+
   return (
     <>
       <Header />
@@ -67,7 +74,7 @@ export const App = () => {
           {displayAddNoteForm && (<AddNoteForm onSubmit={onAddNote} style={{ marginBottom: "20px" }} />)}
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {notes.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>) }
+            {notes.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
           </div>
 
           <IconButton

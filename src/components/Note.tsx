@@ -8,29 +8,37 @@ type NoteProps = {
   children: string,
   onEdit:(id:string,content:string)=>void,
   onDelete:(id:string)=>void,
+  onCopy?:(content:string)=>void,
   style?: CSSProperties
 }
 
-export const Note = ({ id,children,onEdit,onDelete, style }: NoteProps) => {
+export const Note = ({ id,children,onEdit,onDelete, onCopy, style }: NoteProps) => {
 
   const [displayOptions, setDisplayOptions] = useState(false)
   const [isEdit,setIsEdit]=useState(false)
   const [isDelete,setIsDelete]=useState(false)
+  const [isCopy,setIsCopy]=useState(false)
 
   const onEditNode = (cc:string)=>{
     onEdit(id,cc)
     setIsEdit(false)
   }
 
+  const onCopyNote=(_content:string)=>{
+    navigator.clipboard.writeText(children)
+  }
+
   if(isEdit)return(
-    <AddNoteForm initialValue={children} onSubmit={onEditNode} style={{ marginBottom: "20px" }} />
+    <AddNoteForm initialValue={children} onSubmit={onEditNode} style={{ marginBottom: "20px", background:'green'}} />
   )
-  if(isDelete) {
-    return(
-      <Notification yesDelete={()=>{onDelete(id)}} noDelete={()=>setIsDelete(false)}>
-        {'Do you delete note?'}
-      </Notification>
-    )
+  if(isDelete) return(
+    <Notification yesDelete={()=>{onDelete(id)}} noDelete={()=>setIsDelete(false)}>
+      {'Do you delete note?'}
+    </Notification>
+  )
+  if(isCopy) {
+    setIsCopy(false)
+    onCopyNote(children)
   }
 
   return (
@@ -45,7 +53,7 @@ export const Note = ({ id,children,onEdit,onDelete, style }: NoteProps) => {
       >
         {children}
       </p>
-      {displayOptions && <NoteOptions onDisplayEdit={()=>setIsEdit(true)} onDisplayDelete={()=>setIsDelete(true)} style={{ position: "absolute", top: "-10px", right: "10px" }} />}
+      {displayOptions && <NoteOptions onDisplayEdit={()=>setIsEdit(true)} onDisplayDelete={()=>setIsDelete(true)} onCopy={()=>setIsCopy(true)} style={{ position: "absolute", top: "-10px", right: "10px" }} />}
     </div>
   )
 
