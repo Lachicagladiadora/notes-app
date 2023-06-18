@@ -11,7 +11,7 @@ import './index.css'
 library.add(fab, fas)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  
     <App />
-  </React.StrictMode>,
+  
 )

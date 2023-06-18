@@ -12,16 +12,17 @@ type NoteProps = {
   style?: CSSProperties
 }
 
-export const Note = ({ id,children,onEdit,onDelete, onCopy, style }: NoteProps) => {
+export const Note = ({ id,children,onEdit,onDelete, style }: NoteProps) => {
 
   const [displayOptions, setDisplayOptions] = useState(false)
   const [isEdit,setIsEdit]=useState(false)
   const [isDelete,setIsDelete]=useState(false)
   const [isCopy,setIsCopy]=useState(false)
 
-  const onEditNode = (cc:string)=>{
+  const onEditNote = (cc:string)=>{
     onEdit(id,cc)
     setIsEdit(false)
+    // localStorage.setItem('note', JSON.stringify())
   }
 
   const onCopyNote=(_content:string)=>{
@@ -29,7 +30,8 @@ export const Note = ({ id,children,onEdit,onDelete, onCopy, style }: NoteProps) 
   }
 
   if(isEdit)return(
-    <AddNoteForm initialValue={children} onSubmit={onEditNode} style={{ marginBottom: "20px", background:'green'}} />
+    <AddNoteForm initialValue={children} onSubmit={onEditNote} style={{ marginBottom: "20px", background:'green'}} />
+    
   )
   if(isDelete) return(
     <Notification yesDelete={()=>{onDelete(id)}} noDelete={()=>setIsDelete(false)}>

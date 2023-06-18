@@ -1,4 +1,5 @@
-import {  useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Note } from './components/Note'
@@ -8,15 +9,7 @@ import { AddNoteForm } from './components/AddNoteForm'
 
 type NoteItem = { id: string, content: string }
 
-const NOTE_LIST: NoteItem[] = [{
-  id: '01',
-  content: 'First note',
-}, {
-  id: '02',
-  content: 'Second note'
-}]
-
-
+const NOTE_LIST: NoteItem[] = []
 
 export const App = () => {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
@@ -29,7 +22,6 @@ export const App = () => {
 
   // TODO: sort , notesProcessed = useMemo ( filter, sort,[notes] )
 
-
   const onAddNote = (content: string) => {
     const newNote: NoteItem = { id: String(Math.round(Math.random() * 1000000)), content }
     setNotes(prev => ([...prev, newNote]))
@@ -37,20 +29,25 @@ export const App = () => {
   }
 
   const onEditNote = (id: string, content: string) => {
-    setNotes(prev =>prev.map(cur => cur.id === id ? ({ ...cur, content }) : cur))
+    setNotes(prev => prev.map(cur => cur.id === id ? ({ ...cur, content }) : cur))
+    setDisplayAddNoteForm(false)
   }
   // [{i,c},{I,c},{i,c}]
 
   const onDeleteNote = (id: string) => {
-    setNotes(prev => prev.filter(cur=>cur.id!==id))
+    setNotes(prev => prev.filter(cur => cur.id !== id))
   }
 
-  // const onCopyNote = () => {
-    // setNotes(prev => prev.clipboard())
-  //   // setNotes(clipboard.writeText(content.))
-  //   console.log('text')
-  //   // setNoteCopied(false)
-  // }
+  useEffect(() => {
+    const notesData = localStorage.getItem('NotesList')
+    if (notesData) {
+      setNotes(JSON.parse(notesData))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('NotesList', JSON.stringify(notes))
+  }, [notes])
 
   return (
     <>
@@ -99,3 +96,7 @@ export const App = () => {
     </>
   )
 }
+
+// function id(value: NoteItem, index: number, array: NoteItem[]): value is NoteItem {
+//   throw new Error('Function not implemented.')
+// }

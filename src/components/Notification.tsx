@@ -17,7 +17,7 @@ export const Notification=({children,yesDelete,noDelete,style}:NotificationProps
                 borderRadius:'15px', 
                 width:'800px', 
                 height:'800px', 
-                padding: '300px 200px', 
+                padding: '350px 300px', 
                 position:'fixed', 
                 top:'97px', 
                 display:'flex', 
