@@ -1,4 +1,4 @@
-import { CSSProperties, useState } from 'react'
+import { CSSProperties, ChangeEvent, useState } from 'react'
 import { IconButton } from './IconButton'
 import { Input } from './Input'
 
@@ -18,11 +18,12 @@ export const AddNoteForm = ({ onSubmit, initialValue = '', style }: AddNoteFormP
         onSubmit(value)
         setValue('')
       }}
+      
       style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", background: 'red', ...style }}
     >
-      <Input placeholder='write your note' value={value} setValue={setValue} />
-      <IconButton title={"save note"} icon={"check"} type='submit' onClick={() => { }} style={{ background: '#debe49', color: 'black' }} />
-      <IconButton title={"cancel"} icon={"x"} onClick={() => { }} style={{ background: '#debe49', color: 'black' }} />
+      <Input placeholder='write your note' value={value} setValue={setValue} onChange={(e:ChangeEvent<HTMLInputElement>)=>setValue(e.target.value)} />
+      <IconButton title={"save note"} icon={"check"} type='submit' onClick={() => { console.log('save')}} style={{ background: '#debe49', color: 'black' }} />
+      <IconButton title={"cancel"} icon={"x"} onClick={() => {console.log('cancel')}} style={{ background: '#debe49', color: 'black' }} />
     </form>
   )
 }

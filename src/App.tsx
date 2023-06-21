@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
@@ -16,11 +16,16 @@ export const App = () => {
   const [searchInput, setSearchInput] = useState('')
   const [notes, setNotes] = useState(NOTE_LIST)
 
-  //   const notesFiltered = useMemo(()=>{
-  // //filtrar notes usando searchInput
-  //   },[notes])
+    const notesProcessed = useMemo(()=>{
+      return notes.filter((cur)=> cur.content.includes(searchInput)).sort((a,b)=>{
+        if(a.content.toLowerCase()<b.content.toLowerCase())return -1
+        if(a.content.toLowerCase() === b.content.toLowerCase()) return 0
+        return 1
+      })
+    },[notes, searchInput])
 
-  // TODO: sort , notesProcessed = useMemo ( filter, sort,[notes] )
+  // TODO: sort , notesProcessed = useMemo ( filter, sort,[notes] ) //retorna arreglo ordenado
+
 
   const onAddNote = (content: string) => {
     const newNote: NoteItem = { id: String(Math.round(Math.random() * 1000000)), content }
@@ -32,10 +37,14 @@ export const App = () => {
     setNotes(prev => prev.map(cur => cur.id === id ? ({ ...cur, content }) : cur))
     setDisplayAddNoteForm(false)
   }
-  // [{i,c},{I,c},{i,c}]
 
   const onDeleteNote = (id: string) => {
     setNotes(prev => prev.filter(cur => cur.id !== id))
+  }
+
+  const changeSearcher=()=>{
+    // setSearchInput(e.target.value)
+    console.log(searchInput)
   }
 
   useEffect(() => {
@@ -60,7 +69,7 @@ export const App = () => {
             <IconButton
               title='search'
               icon={'search'}
-              onClick={() => console.log("I'm a icon button")}
+              onClick={changeSearcher}
               style={{
                 background: '#debe49',
                 color: '#141414'
@@ -71,7 +80,7 @@ export const App = () => {
           {displayAddNoteForm && (<AddNoteForm onSubmit={onAddNote} style={{ marginBottom: "20px" }} />)}
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {notes.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
+            {notesProcessed.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
           </div>
 
           <IconButton
