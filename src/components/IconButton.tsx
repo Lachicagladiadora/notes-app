@@ -9,6 +9,7 @@ type IconButtonProps = {
   icon: IconProp,
   onClick: () => void,
   size?: IconButtonSize,
+  className?:string,
   type?:"button" | "submit" | "reset",
   id?: string,
   style?: CSSProperties

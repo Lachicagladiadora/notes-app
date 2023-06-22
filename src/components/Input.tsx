@@ -3,16 +3,17 @@ import { CSSProperties } from "react";
 type InputProps = {
   value: string,
   setValue: (newValue: string) => void
+  type?:"text" | "search",
   id?: string,
   placeholder?: string,
   style?: CSSProperties,
 }
 
-export const Input = ({ id, placeholder, value, setValue, style }: InputProps) => {
+export const Input = ({ id, type="text", placeholder, value, setValue, style }: InputProps) => {
   return (
     <input
       id={id}
-      type="text"
+      type={type}
       placeholder={placeholder}
       value={value}
       onChange={e => setValue(e.target.value)}

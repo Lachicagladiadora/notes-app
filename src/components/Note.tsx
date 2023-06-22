@@ -2,6 +2,7 @@ import { CSSProperties, useState } from "react"
 import { NoteOptions } from "./NoteOptions"
 import { AddNoteForm } from "./AddNoteForm"
 import { Notification } from "./Notification"
+import { IconButton } from "./IconButton"
 
 type NoteProps = {
   id:string,
@@ -18,19 +19,26 @@ export const Note = ({ id,children,onEdit,onDelete, style }: NoteProps) => {
   const [isEdit,setIsEdit]=useState(false)
   const [isDelete,setIsDelete]=useState(false)
   const [isCopy,setIsCopy]=useState(false)
+  const [isFavorite,setIsFavorite]=useState(false)
 
   const onEditNote = (cc:string)=>{
     onEdit(id,cc)
     setIsEdit(false)
-    // localStorage.setItem('note', JSON.stringify())
+  }
+  const onCancel = ()=>{
+    setIsEdit(false)
   }
 
   const onCopyNote=(_content:string)=>{
     navigator.clipboard.writeText(children)
   }
+  
+  // const onFavoriteNote=()=>{
+
+  // }
 
   if(isEdit)return(
-    <AddNoteForm initialValue={children} onSubmit={onEditNote} style={{ marginBottom: "20px", background:'green'}} />
+    <AddNoteForm initialValue={children} onSubmit={onEditNote} onClick={onCancel} style={{ marginBottom: "20px", background:'green'}} />
     
   )
   if(isDelete) return(
@@ -42,6 +50,10 @@ export const Note = ({ id,children,onEdit,onDelete, style }: NoteProps) => {
     setIsCopy(false)
     onCopyNote(children)
   }
+  if(isFavorite) return(
+    <IconButton title="favorite" icon={'heart'} size="sm" onClick={()=>isFavorite} style={ { background: 'black', color: '#debe49', border: 'none', margin: '0px 3px 0px 3px' }} />
+
+  )
 
   return (
     <div onMouseOver={() => setDisplayOptions(true)} onMouseOut={() => setDisplayOptions(false)} style={{ position: "relative" }}>
@@ -55,7 +67,7 @@ export const Note = ({ id,children,onEdit,onDelete, style }: NoteProps) => {
       >
         {children}
       </p>
-      {displayOptions && <NoteOptions onDisplayEdit={()=>setIsEdit(true)} onDisplayDelete={()=>setIsDelete(true)} onCopy={()=>setIsCopy(true)} style={{ position: "absolute", top: "-10px", right: "10px" }} />}
+      {displayOptions && <NoteOptions onDisplayEdit={()=>setIsEdit(true)}  onDisplayDelete={()=>setIsDelete(true)} onCopy={()=>setIsCopy(true)}  onFavorite={()=>setIsFavorite((prev) => !prev)} style={{ position: "absolute", top: "-10px", right: "10px" }} />}
     </div>
   )
 
