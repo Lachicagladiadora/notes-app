@@ -5,11 +5,11 @@ import { Input } from './Input'
 type AddNoteFormProps = {
   onSubmit: (newContent: string) => void,
   initialValue?: string,
-  onClick?: ()=>void,
+  onCancel: ()=>void,
   style?: CSSProperties
 }
 
-export const AddNoteForm = ({ onSubmit, initialValue = '', onClick, style }: AddNoteFormProps) => {
+export const AddNoteForm = ({ onSubmit, initialValue = '', onCancel, style }: AddNoteFormProps) => {
   const [value, setValue] = useState(initialValue)
 
   return (
@@ -24,7 +24,7 @@ export const AddNoteForm = ({ onSubmit, initialValue = '', onClick, style }: Add
     >
       <Input type='text' placeholder='write your note' value={value} setValue={setValue} />
       <IconButton type='submit' title={"save note"} icon={"check"} onClick={() => { console.log('save')}} style={{ background: '#debe49', color: 'black' }} />
-      <IconButton type='button' title={"cancel"} icon={"x"} onClick={onClick} style={{ background: '#debe49', color: 'black' }} />
+      <IconButton type='button' title={"cancel"} icon={"x"} onClick={onCancel} style={{ background: '#debe49', color: 'black' }} />
     </form>
   )
 }
