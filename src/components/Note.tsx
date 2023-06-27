@@ -10,6 +10,7 @@ type NoteProps = {
   onEdit: (id: string, content: string) => void,
   onDelete: (id: string) => void,
   onCopy?: (content: string) => void,
+  onFavorite?:(id:string,favorite: boolean) => void,
   style?: CSSProperties
 }
 
@@ -28,6 +29,11 @@ export const Note = ({ id, children, onEdit, onDelete, style }: NoteProps) => {
 
   const onCopyNote = (_content: string) => {
     navigator.clipboard.writeText(children)
+  }
+
+  const onFavoriteNote = (id:string,favorite:boolean) => {
+    onFavorite(id, favorite)
+    setIsFavorite(false)
   }
 
   // const onFavoriteNote=()=>{
@@ -49,7 +55,12 @@ export const Note = ({ id, children, onEdit, onDelete, style }: NoteProps) => {
   }
   if (isFavorite) return (
     // <IconButton title="favorite" icon={'heart'} size="sm" onClick={() => isFavorite} style={{ background: 'black', color: '#debe49', border: 'none', margin: '0px 3px 0px 3px' }} />
-    console.log('add favorite')
+    // console.log('add favorite')
+    <Note id={""} children={""} onEdit={function (id: string, content: string): void {
+      throw new Error("Function not implemented.")
+    } } onDelete={function (id: string): void {
+      throw new Error("Function not implemented.")
+    } }/>
   )
 
   return (
@@ -69,7 +80,7 @@ export const Note = ({ id, children, onEdit, onDelete, style }: NoteProps) => {
           onDisplayEdit={() => setIsEdit(true)}
           onDisplayDelete={() => setIsDelete(true)}
           onCopy={() => setIsCopy(true)}
-          onFavorite={() => setIsFavorite((prev) => !prev)}
+          onFavorite={() => onFavoriteNote}
           style={{
             position: "absolute",
             top: "-10px",

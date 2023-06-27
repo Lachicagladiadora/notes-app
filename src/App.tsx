@@ -1,4 +1,4 @@
-import { Key, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
@@ -13,9 +13,10 @@ const NOTE_LIST: NoteItem[] = []
 
 export const App = () => {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
+  const [displayFavoritesNotes,setDisplayFavoritesNotes] =useState(false)
   const [searchInput, setSearchInput] = useState('')
-  const [notes, setNotes] = useState(NOTE_LIST)
   const [onNotesSort,setOnNotesSort] = useState(false)
+  const [notes, setNotes] = useState(NOTE_LIST)
 
   const notesProcessed = useMemo(() => {
     return notes.filter((cur) => cur.content.includes(searchInput))
@@ -26,7 +27,7 @@ export const App = () => {
     // })
   }, [notes, searchInput])
 
-  // TODO: sort , notesProcessed = useMemo ( filter, sort,[notes] ) //retorna arreglo ordenado
+  // TODO: sort , notesProcessed = useMemo ( filter, sort,[notes] ) //return arreglo ordenado
 
   const onAddNote = (content: string) => {
     const newNote: NoteItem = { id: String(Math.round(Math.random() * 1000000)), content, favorite: false }
@@ -47,10 +48,18 @@ export const App = () => {
     setNotes(prev => prev.filter(cur => cur.id !== id))
   }
 
-  const onFavoriteNote = ((_favorite:true)=> {
-    console.log('favorite list')
-    return notesProcessed.filter((cur)=>cur.favorite)
-  })
+  // const onFavoriteNote = useMemo(() => {
+  //   setNotes(prev => prev.map(_id => _id.favorite === false ? favorite===true))
+  //   setDisplayAddNoteForm(false)
+  // },[])
+
+  // const onFavoriteNote = useMemo((id:string,favorite:boolean)=> {
+  //   console.log('favorite list')
+  //   setNotes(prev => prev.map(cur => cur.id === id ? ({ ...cur, favorite }) : cur))
+
+  //   return notes.filter((cur)=>cur.favorite)
+
+  // },[setDisplayFavoritesNotes])
 
   const changeSearcher = useMemo(() => {
     return notesProcessed && setSearchInput('')
@@ -58,12 +67,12 @@ export const App = () => {
 
   const notesSort =useMemo (() => {
     // console.log('order', notes, onNotesSort)
-    return (notesProcessed.sort((a, b) => {
+    return (notes.sort((a, b) => {
       if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
       if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
       return 1
     }))
-  },[setOnNotesSort])
+  },[notes,setOnNotesSort])
 
   useEffect(() => {
     const notesData = localStorage.getItem('NotesList')
@@ -111,6 +120,7 @@ export const App = () => {
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {!onNotesSort && notesProcessed.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
             {onNotesSort && notesSort.map((cur)=> <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
+            {/* {displayFavoritesNotes && onFavoriteNote.map((cur)=> <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)} */}
           </div>
 
           <IconButton
@@ -131,7 +141,7 @@ export const App = () => {
             title='Favorites'
             icon={'heart'}
             size='lg'
-            onClick={()=>onFavoriteNote(true)}
+            onClick={()=>setDisplayFavoritesNotes((prev)=>!prev)}
             style={{
               background: '#debe49',
               color: '#141414',
