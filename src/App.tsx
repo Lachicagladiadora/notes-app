@@ -13,19 +13,22 @@ const NOTE_LIST: NoteItem[] = []
 
 export const App = () => {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
-  const [displayFavoritesNotes,setDisplayFavoritesNotes] =useState(false)
+  // const [displayFavoritesNotes, setDisplayFavoritesNotes] = useState(false)
   const [searchInput, setSearchInput] = useState('')
-  const [onNotesSort,setOnNotesSort] = useState(false)
+  const [sortDirection, setSortDirection] = useState(false)
+  // const [onSortId, setSortId] = useState(true)
   const [notes, setNotes] = useState(NOTE_LIST)
 
   const notesProcessed = useMemo(() => {
-    return notes.filter((cur) => cur.content.includes(searchInput))
-    // .sort((a, b) => {
-    //   if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
-    //   if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
-    //   return 1
-    // })
-  }, [notes, searchInput])
+    const filteredNotes= notes.filter((cur) => cur.content.includes(searchInput))
+    const sortedNotes = filteredNotes.sort((a, b) => {
+      if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
+      if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
+      return 1
+    })
+      if (sortDirection)return sortedNotes
+      return sortedNotes.reverse()
+  }, [notes, searchInput,sortDirection ])
 
   // TODO: sort , notesProcessed = useMemo ( filter, sort,[notes] ) //return arreglo ordenado
 
@@ -61,18 +64,10 @@ export const App = () => {
 
   // },[setDisplayFavoritesNotes])
 
-  const changeSearcher = useMemo(() => {
-    return notesProcessed && setSearchInput('')
-  },[notes])
+  // const changeSearcher = useMemo(() => {
+  //   return notesProcessed && setSearchInput('')
+  // }, [notes])
 
-  const notesSort =useMemo (() => {
-    // console.log('order', notes, onNotesSort)
-    return (notes.sort((a, b) => {
-      if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
-      if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
-      return 1
-    }))
-  },[notes,setOnNotesSort])
 
   useEffect(() => {
     const notesData = localStorage.getItem('NotesList')
@@ -97,7 +92,7 @@ export const App = () => {
               type='button'
               title='search'
               icon={'search'}
-              onClick={()=>changeSearcher}
+              onClick={() => console.log('search')}
               style={{
                 background: '#debe49',
                 color: '#141414'
@@ -106,11 +101,13 @@ export const App = () => {
             <IconButton
               type='button'
               title='order'
-              icon={'sort'}
-              onClick={()=>setOnNotesSort(prev=>!prev)}
+              icon={'arrow-down'}
+              onClick={() => setSortDirection(prev=>!prev)}
               style={{
                 background: '#debe49',
                 color: '#141414',
+                transform:sortDirection?'rotate(0deg)':'rotate(180deg)',
+                transition: '.5s'
               }}
             />
           </div>
@@ -118,9 +115,8 @@ export const App = () => {
           {displayAddNoteForm && (<AddNoteForm onSubmit={onAddNote} onCancel={onCancelAddNote} style={{ marginBottom: "20px" }} />)}
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {!onNotesSort && notesProcessed.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
-            {onNotesSort && notesSort.map((cur)=> <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
-            {/* {displayFavoritesNotes && onFavoriteNote.map((cur)=> <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)} */}
+            { notesProcessed.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
+            
           </div>
 
           <IconButton
@@ -141,7 +137,7 @@ export const App = () => {
             title='Favorites'
             icon={'heart'}
             size='lg'
-            onClick={()=>setDisplayFavoritesNotes((prev)=>!prev)}
+            onClick={() => console.log('view favorite list')}
             style={{
               background: '#debe49',
               color: '#141414',
