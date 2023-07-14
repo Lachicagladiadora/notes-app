@@ -25,7 +25,7 @@ export const NoteForm = ({id, content, onChange, children, style}:NoteFormProps)
     >
       {children}=
       {<>
-        <Input id={""} placeholder='write your note' value={contentCopy} onChange={(e) => setContentCopy(e.target.value)} />
+        <Input id={""} placeholder='write your note' value={contentCopy} setValue={(e) => setContentCopy(e.target.value)} />
         <IconButton id={""} title={"save note"} icon={"check"} onClick={() => { } } />
         <IconButton id={""} title={"cancel"} icon={"x"} onClick={() => { } } />
       </>}

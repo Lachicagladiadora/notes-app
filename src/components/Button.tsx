@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode } from "react"
 
 type ButtonProps = {
-  id: string,
+  id?: string,
   children: ReactNode,
   onClick: () => void,
   style?: CSSProperties

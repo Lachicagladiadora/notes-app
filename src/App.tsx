@@ -1,154 +1,159 @@
-import { useState } from 'react'
-import './App.css'
+import { useEffect, useMemo, useState } from 'react'
+
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
 import { Note } from './components/Note'
-import { NoteForm } from './components/NoteForm'
-import { Form } from './components/Form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Footer } from './components/Footer'
+import { Header } from './components/Header'
+import { AddNoteForm } from './components/AddNoteForm'
 
-type NoteItem = {id:string, content: string}
-const noteList:NoteItem[] = [{
-  id: '01',
-  content: 'sadsfdg',
-}, {
-  id:'02',
-  content:'sdfgfhngmb'
-}
-]
+type NoteItem = { id: string, content: string, favorite: boolean }
 
-const renderList = (noteList:NoteItem[]) => {
-  return (noteList.map((cur)=>{
-    return(
-      <Note 
-        key={cur.id}
-        id={`${cur.id}`}
-        onMouseMove={() => console.log('note')}     
-      >
-        {cur.content}
-      </Note>
-    )
-  }))
-}
+const NOTE_LIST: NoteItem[] = []
 
-const displayAddNoteForm = ({}:NoteItem[]):void => {
-  // const [contentCopy, setContentCopy] = useState('content')
-  // return(
-  //   <NoteForm id='' content=''onChange={() => (console.log('I am form from add note'))}>
-      
-  //   </NoteForm>
-  // )
-  // return(
-  //   <Form id={''} content={''}  onChange={()=>console.log('hi')}>
-      // {<>
-      //   <Input id={""} placeholder='write your note' value={contentCopy} onChange={(e)=>setContentCopy(e.target.value)}/>
-      //   <IconButton id={""} title={"save note"} icon={"check"} onClick={()=>{}}/>
-      //   <IconButton id={""} title={"cancel"} icon={"x"} onClick={()=>{}}/> 
-      // </>}
-  //   </Form>
-  // )
-}
-
-
-
-// const addNote = () => {)vhvhv}
-
-function App() {
+export const App = () => {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
-  const [contentCopy, setContentCopy] = useState('content')
+  const [displayFavoritesNotes, setDisplayFavoritesNotes] = useState(false)
+  // const [favoriteNote,setFavoriteNote] = useState(note.favorite)
+  const [searchInput, setSearchInput] = useState('')
+  const [sortDirection, setSortDirection] = useState(false)
+  const [notes, setNotes] = useState(NOTE_LIST)
 
-  return(
+  const notesProcessed = useMemo(() => {
+    const filteredNotes = notes.filter((cur) => cur.content.includes(searchInput))
+    const sortedNotes = filteredNotes.sort((a, b) => {
+      if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
+      if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
+      return 1
+    })
+    if (sortDirection) return sortedNotes
+    return sortedNotes.reverse()
+  }, [notes, searchInput, sortDirection])
+
+  const notesFavorites = useMemo(() => {
+    const favoriteList =  notesProcessed.filter((cur) => cur.favorite)
+    const sortedNotes = favoriteList.sort((a, b) => {
+      if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
+      if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
+      return 1
+    })
+    if (sortDirection) return sortedNotes
+    return sortedNotes.reverse()
+  }, [setDisplayFavoritesNotes, notes, sortDirection])
+
+  const onAddNote = (content: string) => {
+    const newNote: NoteItem = { id: String(Math.round(Math.random() * 1000000)), content, favorite: false }
+    setNotes(prev => ([...prev, newNote]))
+    setDisplayAddNoteForm(false)
+  }
+
+  const onCancelAddNote = () => setDisplayAddNoteForm(false)
+
+  const onEditNote = (id: string, content: string) => {
+    setNotes(prev => prev.map(cur => cur.id === id ? ({ ...cur, content }) : cur))
+    setDisplayAddNoteForm(false)
+  }
+
+  const onDeleteNote = (id: string) => {
+    setNotes(prev => prev.filter(cur => cur.id !== id))
+  }
+
+  const onFavoriteNote =(id:string) => {
+    setNotes(prev=>prev.map((cur)=> cur.id===id ? ({...cur,favorite:!cur.favorite}) : cur))
+  }
+
+  useEffect(() => {
+    const notesData = localStorage.getItem('NotesList')
+    if (notesData) {
+      setNotes(JSON.parse(notesData))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('NotesList', JSON.stringify(notes))
+  }, [notes])
+
+  return (
     <>
-      <h1
-        style={{
-          textAlign: 'center',
-          fontSize:'5em',
-          marginBottom: '3px',
-          marginTop:'10px',
-        }}
-      >
-        <FontAwesomeIcon icon={'thumbtack'} style={{color:'#debe49'}}/> my notes
-      </h1>
-      {displayAddNoteForm && <Form id={''} content={''} children={<>
-        <IconButton id={""} title={"save note"} icon={"check"} onClick={() => { } } style={{zoom: '120%', position:'fixed', top:'6.5em', right:'12em', background:'#debe49', color:'black' }}/>
-        <IconButton id={""} title={"cancel"} icon={"x"} onClick={() => { } } style={{zoom:'120%', position:'fixed', top:'6.5em', right:'10em', background:'#debe49', color:'black' }}/>
-      </>} onChange={(e:Event) => setContentCopy(e.target.value) }></Form>}
-      <div
-        style={{
-          maxWidth: '800px',
-          margin: 'auto'
-        }}
-      >
-        <Input 
-          id='ws' 
-          placeholder='Search'
-          style={{
-            width:'100%',
-          }}
-        />
+      <Header />
 
-        <IconButton 
-          id='search-button' 
-          title='search' 
-          icon={'search'} 
-          onClick={()=> console.log("I'm a icon button")}
-          style={{
-            background: '#debe49',
-            color: '#141414'
-          }}
-        />
+      <main style={{ border: 'solid 2px pink' }}>
+        <div style={{ maxWidth: '800px', margin: 'auto', border: 'solid 2px royalBlue' }} >
+          <div style={{ display: "flex", gap: "10px", alignItems: 'center', marginBottom: "30px" }}>
+            <Input type='search' placeholder='Search' value={searchInput} setValue={setSearchInput} />
+            <IconButton
+              type='button'
+              title='search'
+              icon={'search'}
+              onClick={() => console.log('search')}
+              style={{
+                width: '31px',
+                height: '28px',
+                background: '#debe49',
+                color: '#141414'
+              }}
+            />
+            <IconButton
+              type='button'
+              title='order'
+              icon={'arrow-down'}
+              onClick={() => setSortDirection(prev => !prev)}
+              // size=''
+              style={{
+                background: '#debe49',
+                color: '#141414',
+                width: '31px',
+                height: '28px',
+                transform: sortDirection ? 'rotate(0deg)' : 'rotate(180deg)',
+                transition: '.5s'
+              }}
+            />
+          </div>
 
-        {renderList(noteList)}
+          {displayAddNoteForm && (<AddNoteForm onSubmit={onAddNote} onCancel={onCancelAddNote} style={{ marginBottom: "20px" }} />)}
 
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
 
-        <IconButton
-          id='add-note-button'
-          title='add note'
-          icon={'plus'}
-          onClick={()=> setDisplayAddNoteForm((prev) => !prev)}
-          style={{
-            background:'#debe49',
-            color: '#141414',
-            zoom: '180%',
-            fontWeight:'lighter',
-            position: 'fixed',
-            bottom: '1.5em',
-            right: '1.5em',
-            
-          }}
-        />
+            {displayFavoritesNotes && notesFavorites.map((cur) => <Note key={cur.id} id={cur.id} favorite={cur.favorite} onEdit={onEditNote} onDelete={onDeleteNote} onFavorite={onFavoriteNote}>{cur.content}</Note>)}
+            {!displayFavoritesNotes && notesProcessed.map((cur) => <Note key={cur.id} id={cur.id} favorite={cur.favorite} onEdit={onEditNote} onDelete={onDeleteNote} onFavorite={onFavoriteNote}>{cur.content}</Note>)}
+          </div>
 
-      </div>
-      <footer
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          background:'#141414',
-          alignItems: 'center',
-          padding: '2em 0 3em 0',
-          marginTop: '2em',
-        }}
-      >
-        <a 
-          href="https://github.com/Lachicagladiadora" 
-          target="_blank"
-        >
-          <img 
-            src=".././public/github.svg" 
-            alt="github" 
+          <IconButton
+            title='Add Note'
+            icon={'plus'}
+            size='lg'
+            onClick={() => setDisplayAddNoteForm((prev) => !prev)}
             style={{
-              height:'30px',
-              margin:'1em 0',
-              color: '#debe49',
+              background: '#debe49',
+              color: '#141414',
+              fontWeight: '400',
+              position: 'fixed',
+              bottom: '10%',
+              right: '8%',
+              transform: displayAddNoteForm ? 'rotate(45deg)' : 'rotate(180deg)',
+              transition: '.5s'
             }}
           />
-        </a>
-        
-        <p>2023 - by Lachicagladiadora</p>
-      </footer>
+          <IconButton
+            title='Favorites'
+            icon={'heart'}
+            size='lg'
+            onClick={() => setDisplayFavoritesNotes((prev) => !prev)}
+            style={{
+              background: displayFavoritesNotes ? '#141414' : '#debe49',
+              color: displayFavoritesNotes ? '#debe49' : '#141414',
+              fontWeight: '400',
+              position: 'fixed',
+              bottom: '16%',
+              right: '8%',
+              transition: '.4s'
+            }}
+          />
+        </div>
 
+      </main>
+
+      <Footer />
     </>
   )
 }
-
-export default App

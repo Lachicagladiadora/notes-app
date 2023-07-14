@@ -1,48 +1,33 @@
-import { CSSProperties, ReactFragment } from "react"
+import { CSSProperties, ReactNode } from "react"
 
 type FormProps = {
   id: string,
   content: string,
-  onChange?: ()=>{},
-  children: JSX.Element | ReactFragment,
+  onSubmit?: ()=>{},
+  children: ReactNode
   style?:CSSProperties
 }
 
-export const Form = ({id, content, onChange: onChange, children, style}:FormProps) => {
+export const Form = ({id, content, onSubmit, children, style}:FormProps) => {
   return(
     <form
       id={id}
       content={content}
-      
+      onSubmit={onSubmit}
       style={{
-        margin: '4em 2.5em 2em 4em',
-        background: 'black',
-        border:'solid 2px #debe49',
-        width: '80%',
-        height: '75%',
-        borderRadius: '15px',
-        padding: '2em',
+        background: 'rgba(0, 0, 0, 0.73)',
+        width: '100%',
+        height: '100%',
         display:'flex',
         justifyContent: 'center',
+        alignItems: 'center',
         position:'fixed',
-        bottom: '4rem',
-        right: '4rem',
+        bottom: '0',
+        right: '0',
         ...style
       }}
     >
-      <textarea name="write" id={id}  placeholder='write your note' value={''} onChange={onChange} 
-        style={{
-          borderRadius: '15px', 
-          borderStyle: 'none', 
-          padding: '1.5em 1.5em', 
-          marginTop:'4em',
-          marginRight: '-25px',
-          border:'solid 1px #debe49',
-          background: '#141414',
-          color:'#e6e6e6',
-          fontWeight: 'bold',
-          marginBottom: '2em'}}
-      />
+      
       {children}
     </form>
   )
