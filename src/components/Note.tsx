@@ -2,47 +2,36 @@ import { CSSProperties, useState } from "react"
 import { NoteOptions } from "./NoteOptions"
 import { AddNoteForm } from "./AddNoteForm"
 import { Notification } from "./Notification"
-// import { IconButton } from "./IconButton"
 
 type NoteProps = {
   id: string,
   children: string,
+  favorite: boolean, 
   onEdit: (id: string, content: string) => void,
   onDelete: (id: string) => void,
-  onCopy?: (content: string) => void,
-  onFavorite?:(id:string,favorite: boolean) => void,
+  // onCopy?: (content: string) => void,
+  onFavorite: (id: string) => void,
   style?: CSSProperties
 }
 
-export const Note = ({ id, children, onEdit, onDelete, style }: NoteProps) => {
+export const Note = ({ id, children, favorite, onEdit, onDelete, onFavorite, style }: NoteProps) => {
 
   const [displayOptions, setDisplayOptions] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
   const [isDelete, setIsDelete] = useState(false)
   const [isCopy, setIsCopy] = useState(false)
-  // const [isFavorite, setIsFavorite] = useState(false)
 
   const onEditNote = (cc: string) => {
     onEdit(id, cc)
     setIsEdit(false)
   }
 
-  const onCopyNote = (_content: string) => {
+  const onCopyNote = (children: string) => {
     navigator.clipboard.writeText(children)
   }
 
-  // const onFavoriteNote = (id:string,favorite:boolean) => {
-  //   onFavorite(id, favorite)
-  //   setIsFavorite(false)
-  // }
-
-  // const onFavoriteNote=()=>{
-
-  // }
-
   if (isEdit) return (
-    <AddNoteForm initialValue={children} onSubmit={onEditNote} onCancel={()=>setIsEdit(false)} style={{ marginBottom: "20px", background: 'green' }} />
-
+    <AddNoteForm initialValue={children} onSubmit={onEditNote} onCancel={() => setIsEdit(false)} style={{ marginBottom: "20px", background: 'green' }} />
   )
   if (isDelete) return (
     <Notification yesDelete={() => { onDelete(id) }} noDelete={() => setIsDelete(false)}>
@@ -53,21 +42,12 @@ export const Note = ({ id, children, onEdit, onDelete, style }: NoteProps) => {
     setIsCopy(false)
     onCopyNote(children)
   }
-  // if (isFavorite) return (
-  //   // <IconButton title="favorite" icon={'heart'} size="sm" onClick={() => isFavorite} style={{ background: 'black', color: '#debe49', border: 'none', margin: '0px 3px 0px 3px' }} />
-  //   // console.log('add favorite')
-  //   <Note id={""} children={""} onEdit={function (id: string, content: string): void {
-  //     throw new Error("Function not implemented.")
-  //   } } onDelete={function (id: string): void {
-  //     throw new Error("Function not implemented.")
-  //   } }/>
-  // )
 
   return (
-    <div onMouseOver={() => setDisplayOptions(true)} onMouseOut={() => setDisplayOptions(false)} style={{ position: "relative" }}>
+    <div onMouseOver={() => setDisplayOptions(true)} onMouseOut={() => setDisplayOptions(false)}  style={{ position: "relative" }}>
       <p
         style={{
-          background: '#123',
+          background: '#141414',
           borderRadius: '16px',
           padding: '10px 20px',
           ...style
@@ -80,7 +60,13 @@ export const Note = ({ id, children, onEdit, onDelete, style }: NoteProps) => {
           onDisplayEdit={() => setIsEdit(true)}
           onDisplayDelete={() => setIsDelete(true)}
           onCopy={() => setIsCopy(true)}
-          onFavorite={() => console.log('add to favorite')}
+          onFavorite={() => onFavorite(id)}
+          styleFavorite={{
+            background: 'black',
+            color: favorite ? '#debe49' : '#e6e6e6',
+            border: 'none',
+            margin: '0px 3px 0px 3px'
+          }}
           style={{
             position: "absolute",
             top: "-10px",
@@ -92,3 +78,4 @@ export const Note = ({ id, children, onEdit, onDelete, style }: NoteProps) => {
   )
 
 }
+

@@ -7,30 +7,39 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { AddNoteForm } from './components/AddNoteForm'
 
-type NoteItem = { id: string, content: string, favorite: false }
+type NoteItem = { id: string, content: string, favorite: boolean }
 
 const NOTE_LIST: NoteItem[] = []
 
 export const App = () => {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
-  // const [displayFavoritesNotes, setDisplayFavoritesNotes] = useState(false)
+  const [displayFavoritesNotes, setDisplayFavoritesNotes] = useState(false)
+  // const [favoriteNote,setFavoriteNote] = useState(note.favorite)
   const [searchInput, setSearchInput] = useState('')
   const [sortDirection, setSortDirection] = useState(false)
-  // const [onSortId, setSortId] = useState(true)
   const [notes, setNotes] = useState(NOTE_LIST)
 
   const notesProcessed = useMemo(() => {
-    const filteredNotes= notes.filter((cur) => cur.content.includes(searchInput))
+    const filteredNotes = notes.filter((cur) => cur.content.includes(searchInput))
     const sortedNotes = filteredNotes.sort((a, b) => {
       if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
       if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
       return 1
     })
-      if (sortDirection)return sortedNotes
-      return sortedNotes.reverse()
-  }, [notes, searchInput,sortDirection ])
+    if (sortDirection) return sortedNotes
+    return sortedNotes.reverse()
+  }, [notes, searchInput, sortDirection])
 
-  // TODO: sort , notesProcessed = useMemo ( filter, sort,[notes] ) //return arreglo ordenado
+  const notesFavorites = useMemo(() => {
+    const favoriteList =  notesProcessed.filter((cur) => cur.favorite)
+    const sortedNotes = favoriteList.sort((a, b) => {
+      if (a.content.toLowerCase() < b.content.toLowerCase()) return -1
+      if (a.content.toLowerCase() === b.content.toLowerCase()) return 0
+      return 1
+    })
+    if (sortDirection) return sortedNotes
+    return sortedNotes.reverse()
+  }, [setDisplayFavoritesNotes, notes, sortDirection])
 
   const onAddNote = (content: string) => {
     const newNote: NoteItem = { id: String(Math.round(Math.random() * 1000000)), content, favorite: false }
@@ -38,9 +47,7 @@ export const App = () => {
     setDisplayAddNoteForm(false)
   }
 
-  const onCancelAddNote = () => {
-    return setDisplayAddNoteForm(false)
-  }
+  const onCancelAddNote = () => setDisplayAddNoteForm(false)
 
   const onEditNote = (id: string, content: string) => {
     setNotes(prev => prev.map(cur => cur.id === id ? ({ ...cur, content }) : cur))
@@ -51,23 +58,9 @@ export const App = () => {
     setNotes(prev => prev.filter(cur => cur.id !== id))
   }
 
-  // const onFavoriteNote = useMemo(() => {
-  //   setNotes(prev => prev.map(_id => _id.favorite === false ? favorite===true))
-  //   setDisplayAddNoteForm(false)
-  // },[])
-
-  // const onFavoriteNote = useMemo((id:string,favorite:boolean)=> {
-  //   console.log('favorite list')
-  //   setNotes(prev => prev.map(cur => cur.id === id ? ({ ...cur, favorite }) : cur))
-
-  //   return notes.filter((cur)=>cur.favorite)
-
-  // },[setDisplayFavoritesNotes])
-
-  // const changeSearcher = useMemo(() => {
-  //   return notesProcessed && setSearchInput('')
-  // }, [notes])
-
+  const onFavoriteNote =(id:string) => {
+    setNotes(prev=>prev.map((cur)=> cur.id===id ? ({...cur,favorite:!cur.favorite}) : cur))
+  }
 
   useEffect(() => {
     const notesData = localStorage.getItem('NotesList')
@@ -94,6 +87,8 @@ export const App = () => {
               icon={'search'}
               onClick={() => console.log('search')}
               style={{
+                width: '31px',
+                height: '28px',
                 background: '#debe49',
                 color: '#141414'
               }}
@@ -102,11 +97,14 @@ export const App = () => {
               type='button'
               title='order'
               icon={'arrow-down'}
-              onClick={() => setSortDirection(prev=>!prev)}
+              onClick={() => setSortDirection(prev => !prev)}
+              // size=''
               style={{
                 background: '#debe49',
                 color: '#141414',
-                transform:sortDirection?'rotate(0deg)':'rotate(180deg)',
+                width: '31px',
+                height: '28px',
+                transform: sortDirection ? 'rotate(0deg)' : 'rotate(180deg)',
                 transition: '.5s'
               }}
             />
@@ -115,8 +113,9 @@ export const App = () => {
           {displayAddNoteForm && (<AddNoteForm onSubmit={onAddNote} onCancel={onCancelAddNote} style={{ marginBottom: "20px" }} />)}
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            { notesProcessed.map((cur) => <Note key={cur.id} id={cur.id} onEdit={onEditNote} onDelete={onDeleteNote}>{cur.content}</Note>)}
-            
+
+            {displayFavoritesNotes && notesFavorites.map((cur) => <Note key={cur.id} id={cur.id} favorite={cur.favorite} onEdit={onEditNote} onDelete={onDeleteNote} onFavorite={onFavoriteNote}>{cur.content}</Note>)}
+            {!displayFavoritesNotes && notesProcessed.map((cur) => <Note key={cur.id} id={cur.id} favorite={cur.favorite} onEdit={onEditNote} onDelete={onDeleteNote} onFavorite={onFavoriteNote}>{cur.content}</Note>)}
           </div>
 
           <IconButton
@@ -129,22 +128,25 @@ export const App = () => {
               color: '#141414',
               fontWeight: '400',
               position: 'fixed',
-              bottom: '100px',
-              right: '100px',
+              bottom: '10%',
+              right: '8%',
+              transform: displayAddNoteForm ? 'rotate(45deg)' : 'rotate(180deg)',
+              transition: '.5s'
             }}
           />
           <IconButton
             title='Favorites'
             icon={'heart'}
             size='lg'
-            onClick={() => console.log('view favorite list')}
+            onClick={() => setDisplayFavoritesNotes((prev) => !prev)}
             style={{
-              background: '#debe49',
-              color: '#141414',
+              background: displayFavoritesNotes ? '#141414' : '#debe49',
+              color: displayFavoritesNotes ? '#debe49' : '#141414',
               fontWeight: '400',
               position: 'fixed',
-              bottom: '150px',
-              right: '100px',
+              bottom: '16%',
+              right: '8%',
+              transition: '.4s'
             }}
           />
         </div>

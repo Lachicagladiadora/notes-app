@@ -6,10 +6,12 @@ type NoteOptionsProps = {
   onDisplayDelete: ()=>void,
   onCopy:()=>void,
   onFavorite:()=>void,
+  styleFavorite?: CSSProperties
   style?: CSSProperties
 }
 
-export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,onCopy,onFavorite,style }: NoteOptionsProps) => {
+export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,onCopy,onFavorite,styleFavorite,style }: NoteOptionsProps) => {
+
   return (
     <div
       style={{
@@ -23,7 +25,7 @@ export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,onCopy,onFavorite,st
       <IconButton title="edit" icon={'pen'} size="sm" onClick={onDisplayEdit} style={IconButtonStyles} />
       <IconButton title="delete" icon={'trash'} size="sm" onClick={onDisplayDelete} style={IconButtonStyles} />
       <IconButton title="copy" icon={'copy'} size="sm" onClick={onCopy} style={IconButtonStyles} />
-      <IconButton className='favorite' title="favorite" icon={'heart'} size="sm" onClick={onFavorite} style={IconButtonStyles} />
+      <IconButton className='favorite' title="favorite" icon={'heart'} size="sm" onClick={onFavorite} style={{...styleFavorite}} />
     </div>
   )
 }
