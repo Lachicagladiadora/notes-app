@@ -3,7 +3,7 @@ import { CSSProperties, ReactNode } from "react"
 type FormProps = {
   id: string,
   content: string,
-  onSubmit?: ()=>{},
+  onSubmit?: ()=>void,
   children: ReactNode
   style?:CSSProperties
 }

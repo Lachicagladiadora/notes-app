@@ -3,6 +3,8 @@ import { NoteOptions } from "./NoteOptions"
 import { AddNoteForm } from "./AddNoteForm"
 import { Notification } from "./Notification"
 
+import { DESIGN_SYSTEM } from "../constants"
+
 type NoteProps = {
   id: string,
   children: string,
@@ -47,9 +49,13 @@ export const Note = ({ id, children, favorite, onEdit, onDelete, onFavorite, sty
     <div onMouseOver={() => setDisplayOptions(true)} onMouseOut={() => setDisplayOptions(false)}  style={{ position: "relative" }}>
       <p
         style={{
-          background: '#141414',
+          background: DESIGN_SYSTEM.gray,
           borderRadius: '16px',
           padding: '10px 20px',
+          color: DESIGN_SYSTEM.main,
+          fontFamily: DESIGN_SYSTEM.fontFamily,
+          letterSpacing:'0px',
+          lineHeight:'35px',
           ...style
         }}
       >
@@ -62,8 +68,8 @@ export const Note = ({ id, children, favorite, onEdit, onDelete, onFavorite, sty
           onCopy={() => setIsCopy(true)}
           onFavorite={() => onFavorite(id)}
           styleFavorite={{
-            background: 'black',
-            color: favorite ? '#debe49' : '#e6e6e6',
+            background: DESIGN_SYSTEM.black,
+            color: favorite ? DESIGN_SYSTEM.main : DESIGN_SYSTEM.white,
             border: 'none',
             margin: '0px 3px 0px 3px'
           }}

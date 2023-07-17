@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { DESIGN_SYSTEM } from './constants'
 
 import { IconButton } from './components/IconButton'
 import { Input } from './components/Input'
@@ -14,7 +15,6 @@ const NOTE_LIST: NoteItem[] = []
 export const App = () => {
   const [displayAddNoteForm, setDisplayAddNoteForm] = useState(false)
   const [displayFavoritesNotes, setDisplayFavoritesNotes] = useState(false)
-  // const [favoriteNote,setFavoriteNote] = useState(note.favorite)
   const [searchInput, setSearchInput] = useState('')
   const [sortDirection, setSortDirection] = useState(false)
   const [notes, setNotes] = useState(NOTE_LIST)
@@ -77,22 +77,40 @@ export const App = () => {
     <>
       <Header />
 
-      <main style={{ border: 'solid 2px pink' }}>
-        <div style={{ maxWidth: '800px', margin: 'auto', border: 'solid 2px royalBlue' }} >
-          <div style={{ display: "flex", gap: "10px", alignItems: 'center', marginBottom: "30px" }}>
-            <Input type='search' placeholder='Search' value={searchInput} setValue={setSearchInput} />
-            <IconButton
+      <main style={{background: DESIGN_SYSTEM.black }}>
+        <div style={{ maxWidth: '800px', margin: 'auto' }} >
+          <div style={{ display: "flex", gap: "0", alignItems: 'center', marginBottom: "30px" }}>
+          <IconButton
               type='button'
               title='search'
               icon={'search'}
               onClick={() => console.log('search')}
               style={{
-                width: '31px',
-                height: '28px',
-                background: '#debe49',
-                color: '#141414'
+                width: '45px',
+                height: '40px',
+                fontSize:'14px',
+                background: DESIGN_SYSTEM.gray,
+                color: DESIGN_SYSTEM.white,
+                borderRadius:'50% 0 0 50%',
+
               }}
             />
+
+            <Input type='search' placeholder='Search' value={searchInput} setValue={setSearchInput} 
+              style={{
+                outline: 'none',
+                color: DESIGN_SYSTEM.main,
+                borderRadius:'0',
+                padding: '10px 0',
+                backgroundImage: "url('https://img.icons8.com/ios/100/000000/search--v1.png')",
+                backgroundRepeat:'no-repeat',
+                backgroundSize:' 5px', 
+                fontFamily: DESIGN_SYSTEM.fontFamily,
+                letterSpacing:'0px',
+                lineHeight:'20px',
+              }}
+            />
+            
             <IconButton
               type='button'
               title='order'
@@ -100,12 +118,16 @@ export const App = () => {
               onClick={() => setSortDirection(prev => !prev)}
               // size=''
               style={{
-                background: '#debe49',
-                color: '#141414',
-                width: '31px',
-                height: '28px',
+                background: DESIGN_SYSTEM.main,
+                color: DESIGN_SYSTEM.black,
+                width: '45px',
+                height: '40px',
+                fontSize:'14px',
+                background: DESIGN_SYSTEM.gray,
+                color: DESIGN_SYSTEM.white,
+                borderRadius: sortDirection ? '0 50% 50% 0 ' : '50% 0 0 50%',
                 transform: sortDirection ? 'rotate(0deg)' : 'rotate(180deg)',
-                transition: '.5s'
+                transition: '.5s',
               }}
             />
           </div>
@@ -124,12 +146,15 @@ export const App = () => {
             size='lg'
             onClick={() => setDisplayAddNoteForm((prev) => !prev)}
             style={{
-              background: '#debe49',
-              color: '#141414',
+              background: DESIGN_SYSTEM.main,
+              color: DESIGN_SYSTEM.black,
               fontWeight: '400',
               position: 'fixed',
               bottom: '10%',
               right: '8%',
+              height: "48px",
+              width: "48px",
+              fontSize: '16px',
               transform: displayAddNoteForm ? 'rotate(45deg)' : 'rotate(180deg)',
               transition: '.5s'
             }}
@@ -140,12 +165,15 @@ export const App = () => {
             size='lg'
             onClick={() => setDisplayFavoritesNotes((prev) => !prev)}
             style={{
-              background: displayFavoritesNotes ? '#141414' : '#debe49',
-              color: displayFavoritesNotes ? '#debe49' : '#141414',
+              background: displayFavoritesNotes ? DESIGN_SYSTEM.black : DESIGN_SYSTEM.main,
+              color: displayFavoritesNotes ? DESIGN_SYSTEM.main : DESIGN_SYSTEM.black,
               fontWeight: '400',
               position: 'fixed',
               bottom: '16%',
               right: '8%',
+              height: "48px",
+              width: "48px",
+              fontSize: '16px',
               transition: '.4s'
             }}
           />

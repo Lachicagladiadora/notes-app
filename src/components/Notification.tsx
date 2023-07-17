@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode } from "react"
 import { Button } from "./Button"
+import { DESIGN_SYSTEM } from "../constants"
 
 type NotificationProps = {
     children: ReactNode,
@@ -12,7 +13,7 @@ export const Notification = ({ children, yesDelete, noDelete, style }: Notificat
     return (
         <div
             style={{
-                background: '#00000099',
+                background: 'rgb(35 35 41 / 57%)',
                 width: '100vw',
                 height: '100vh',
                 padding: '350px 300px',

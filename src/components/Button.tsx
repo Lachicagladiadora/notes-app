@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from "react"
+import { DESIGN_SYSTEM } from "../constants"
 
 type ButtonProps = {
   id?: string,
@@ -16,9 +17,10 @@ export const Button = ({id, children, onClick, style}:ButtonProps) => {
       style={{
         padding: '6px 8px', 
         borderRadius: '10px', 
-        background: '#141414',
-        color:'#debe49',
-        border: 'solid 1px #debe49',
+        background: DESIGN_SYSTEM.black,
+        color: DESIGN_SYSTEM.main,
+        border: 'solid 1px DESIGN_SYSTEM.main',
+        
         ...style
       }}
     >

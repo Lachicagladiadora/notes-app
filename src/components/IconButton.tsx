@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CSSProperties } from "react"
+ import { DESIGN_SYSTEM } from "../constants"
 
 type IconButtonSize = "sm" | "md" | "lg"
 
@@ -30,9 +31,9 @@ export const IconButton = ({ id, title, icon, onClick,size="md",type="button", s
         justifyContent:"center",
         borderRadius: '50%',
         borderStyle: 'none',
-        color: '#debe49',
-        background: '#141414',
-        border: 'solid 1px #debe49',
+        color: DESIGN_SYSTEM.main,
+        background: DESIGN_SYSTEM.black,
+        border: 'solid 1px DESIGN_SYSTEM.main',
         fontSize:SIZE[size].icon,
         cursor:"pointer",
         ...style
@@ -48,3 +49,7 @@ const SIZE: { [key in IconButtonSize]: {size:string,icon:string} } = {
   md: {size:"28px",icon:"16px"},
   lg: {size:"36px",icon:"26px"},
 }
+
+// sm: {size:"30px",icon:"10px"},
+// md: {size:"48px",icon:"10px"},
+// lg: {size:"56px",icon:"16px"},

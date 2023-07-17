@@ -1,5 +1,6 @@
 import { CSSProperties } from "react"
 import { IconButton } from "./IconButton"
+import { DESIGN_SYSTEM } from "../constants"
 
 type NoteOptionsProps = {
   onDisplayEdit:()=>void,
@@ -16,7 +17,7 @@ export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,onCopy,onFavorite,st
     <div
       style={{
         display:"flex",
-        background: 'black',
+        background: DESIGN_SYSTEM.black,
         borderRadius: '15px',
         padding: '4px 6px',
         ...style
@@ -30,5 +31,4 @@ export const NoteOptions = ({ onDisplayEdit,onDisplayDelete,onCopy,onFavorite,st
   )
 }
 
-const IconButtonStyles: CSSProperties = { background: 'black', color: '#e6e6e6', border: 'none', margin: '0px 3px 0px 3px' }
-// const IconButtonFavoriteStyles: CSSProperties = { background: 'black', color: '#debe49', border: 'none', margin: '0px 3px 0px 3px' }
+const IconButtonStyles: CSSProperties = { background: DESIGN_SYSTEM.black, color: DESIGN_SYSTEM.white, border: 'none', margin: '0px 3px 0px 3px' }

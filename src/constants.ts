@@ -1,5 +1,15 @@
 export const DESIGN_SYSTEM  ={
-  black:'#141414'
+  main:  '#f2b342', 
+  black:' #0d040b',
+  white: ' #f9f4f6' ,
+  gray: '#232329 ',
+  yellow300: ' #f1bc4b',
+  yellow600: ' #c0913c',
+  yellow700: 'e3a563 ',
+  yellow800: ' #c0913c ',
+
+  fontFamily: "'Open Sans', sans-serif"
+
 }
 
 

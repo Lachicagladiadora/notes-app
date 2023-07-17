@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { DESIGN_SYSTEM } from "../constants";
 
 type InputProps = {
   value: string,
@@ -19,12 +20,12 @@ export const Input = ({ id, type="text", placeholder, value, setValue, style }: 
       onChange={e => setValue(e.target.value)}
       style={{
         width: '100%',
-        borderRadius: '35px',
+        borderRadius: '35px 0 0 35px',
         borderStyle: 'none',
         padding: '10px 20px',
-        border: 'solid 1px #debe49',
-        background: '#141414',
-        color: '#e6e6e6',
+        border: 'solid 1px DESIGN_SYSTEM.main',
+        background: DESIGN_SYSTEM.gray,
+        color: DESIGN_SYSTEM.white,
         fontWeight: '700',
         ...style
       }}
